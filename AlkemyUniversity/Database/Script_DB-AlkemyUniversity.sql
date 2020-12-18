@@ -1,3 +1,8 @@
+/*
+use master
+drop database AlkemyUniversity
+*/
+
 CREATE DATABASE AlkemyUniversity
 GO
 USE AlkemyUniversity
@@ -33,42 +38,52 @@ ADD CONSTRAINT FK_Schedules_IDSubject FOREIGN KEY(ID_SUbject) REFERENCES Subject
 GO
 CREATE TABLE Users(
 ID int not null identity(1,1),
-Administrator bit not null,
-Pass varchar(100) not null
+Administrator bit not null
 )
 GO
 ALTER TABLE Users
 ADD CONSTRAINT PK_USERS PRIMARY KEY (ID)
 
 -------------------------
+CREATE TABLE Administrator(
+User_ID int not null,
+Password varchar(100) not null
+)
+GO
+ALTER TABLE Administrator
+ADD CONSTRAINT PK_Admin_IDUser PRIMARY KEY(User_ID)
+GO
+ALTER TABLE	Administrator
+ADD CONSTRAINT FK_Admin_IDUser FOREIGN KEY(User_ID) REFERENCES Users(ID)
+-------------------------
 
 GO
 CREATE TABLE Personal_Data(
-ID_User int not null,
+User_ID int not null,
 DNI int not null unique,
 Lastname varchar(100) not null,
 Names varchar(100) not null
 )
 GO
 ALTER TABLE Personal_Data 
-ADD CONSTRAINT PK_PerData_IDUser PRIMARY KEY(ID_User)
+ADD CONSTRAINT PK_PerData_IDUser PRIMARY KEY(User_ID)
 GO
 ALTER TABLE Personal_Data
-ADD CONSTRAINT FK_PerData_IDUser FOREIGN KEY (ID_User) REFERENCES Users(ID)
+ADD CONSTRAINT FK_PerData_IDUser FOREIGN KEY (User_ID) REFERENCES Users(ID)
 
 -------------------------
 
 GO
 CREATE TABLE Students(
-ID_User int not null, 
+User_ID int not null, 
 Docket int not null identity(1,1) unique
 )
 GO
 ALTER TABLE Students
-ADD CONSTRAINT PK_Students_IDUser PRIMARY KEY(ID_User)
+ADD CONSTRAINT PK_Students_IDUser PRIMARY KEY(User_ID)
 GO
 ALTER TABLE Students
-ADD CONSTRAINT FK_Students_IDUser FOREIGN KEY(ID_User) REFERENCES Users(ID)
+ADD CONSTRAINT FK_Students_IDUser FOREIGN KEY(User_ID) REFERENCES Users(ID)
 
 -------------------------
 
@@ -119,9 +134,11 @@ GO
 ALTER TABLE Teachers_by_Subject
 ADD CONSTRAINT FK_TeacBySubj_IDTeacher FOREIGN KEY(Teacher_ID) REFERENCES Teachers(ID)
 
-/*
-
-use master
-drop database AlkemyUniversity
-
-*/
+-----------------------------------------------------------------------------------------
+--INSERT DEL PRIMER ADMINISTRADOR PARA LA PAGINA--
+GO
+INSERT INTO Users(Administrator)
+VALUES (1)
+GO
+INSERT INTO Administrator(User_ID,Password)
+VALUES (1,'admin') 

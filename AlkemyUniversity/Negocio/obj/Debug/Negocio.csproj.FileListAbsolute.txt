@@ -1,0 +1,9 @@
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\bin\Debug\Negocio.dll
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\bin\Debug\Negocio.pdb
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\bin\Debug\Dominio.dll
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\bin\Debug\Dominio.pdb
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\obj\Debug\Negocio.dll
+C:\Users\Hernan\Documents\Proyectos\AlkemyUniversity\AlkemyUniversity\Negocio\obj\Debug\Negocio.pdb
