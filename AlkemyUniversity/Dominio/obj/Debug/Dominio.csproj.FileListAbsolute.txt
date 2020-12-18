@@ -1,0 +1,6 @@
+C:\Users\Hernan\Documents\Proyectos\Alkemy-Challenge\Web\Alkemy-Challenge\Models\Dominio\bin\Debug\Dominio.dll
+C:\Users\Hernan\Documents\Proyectos\Alkemy-Challenge\Web\Alkemy-Challenge\Models\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Hernan\Documents\Proyectos\Alkemy-Challenge\Web\Alkemy-Challenge\Models\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\Hernan\Documents\Proyectos\Alkemy-Challenge\Web\Alkemy-Challenge\Models\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Hernan\Documents\Proyectos\Alkemy-Challenge\Web\Alkemy-Challenge\Models\Dominio\obj\Debug\Dominio.dll
+C:\Users\Hernan\Documents\Proyectos\Alkemy-Challenge\Web\Alkemy-Challenge\Models\Dominio\obj\Debug\Dominio.pdb
