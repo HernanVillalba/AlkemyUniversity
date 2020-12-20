@@ -11,7 +11,22 @@ namespace Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+        }
 
+        private void Redireccionar()
+        { 
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
+            }
+        }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            Session["AdminBool"] = null;
+            Session["ID"] = null;
+            Response.Redirect("loginAdministradorPagina.aspx");
         }
     }
 }
