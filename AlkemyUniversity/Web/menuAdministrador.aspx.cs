@@ -7,15 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace Web
 {
-    public partial class menuAdministrador : System.Web.UI.Page
+    public partial class menuAdministrador2 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             Redireccionar();
         }
-
         private void Redireccionar()
-        { 
+        {
             if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
             {
                 Response.Redirect("loginAdministradorPagina.aspx");

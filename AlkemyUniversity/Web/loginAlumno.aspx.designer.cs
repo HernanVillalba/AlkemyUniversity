@@ -11,7 +11,7 @@ namespace Web
 {
 
 
-    public partial class loginAlumno
+    public partial class loginAlumno2
     {
 
         /// <summary>

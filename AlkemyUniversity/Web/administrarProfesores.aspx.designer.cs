@@ -11,34 +11,25 @@ namespace Web
 {
 
 
-    public partial class loginAdministradorPagina2
+    public partial class administrarProfesores
     {
 
         /// <summary>
-        /// Control tbIDAdmin.
+        /// Control tbBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbIDAdmin;
+        protected global::System.Web.UI.WebControls.TextBox tbBuscar;
 
         /// <summary>
-        /// Control tbContraseñaAdmin.
+        /// Control btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbContraseñaAdmin;
-
-        /// <summary>
-        /// Control btnIngresar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIngresar;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
     }
 }

@@ -11,34 +11,25 @@ namespace Web
 {
 
 
-    public partial class loginAdministradorPagina2
+    public partial class AgregarMateria
     {
 
         /// <summary>
-        /// Control tbIDAdmin.
+        /// Control tbNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbIDAdmin;
+        protected global::System.Web.UI.WebControls.TextBox tbNombre;
 
         /// <summary>
-        /// Control tbContraseñaAdmin.
+        /// Control tbCapacidadMax.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbContraseñaAdmin;
-
-        /// <summary>
-        /// Control btnIngresar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIngresar;
+        protected global::System.Web.UI.WebControls.TextBox tbCapacidadMax;
     }
 }

@@ -105,7 +105,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="administrarMateria.aspx" />
+    <Content Include="administrarMaterias.aspx" />
+    <Content Include="administrarProfesores.aspx" />
+    <Content Include="AgregarMateria.aspx" />
+    <Content Include="agregarProfesor.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -126,6 +129,7 @@
     <Content Include="loginAdministradorPagina.aspx" />
     <Content Include="loginAlumno.aspx" />
     <Content Include="menuAdministrador.aspx" />
+    <Content Include="Content\misEstilos.css" />
     <Content Include="menuAlumno.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -162,12 +166,33 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="administrarMateria.aspx.cs">
-      <DependentUpon>administrarMateria.aspx</DependentUpon>
+    <Compile Include="administrarMaterias.aspx.cs">
+      <DependentUpon>administrarMaterias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administrarMateria.aspx.designer.cs">
-      <DependentUpon>administrarMateria.aspx</DependentUpon>
+    <Compile Include="administrarMaterias.aspx.designer.cs">
+      <DependentUpon>administrarMaterias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administrarProfesores.aspx.cs">
+      <DependentUpon>administrarProfesores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administrarProfesores.aspx.designer.cs">
+      <DependentUpon>administrarProfesores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarMateria.aspx.cs">
+      <DependentUpon>AgregarMateria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarMateria.aspx.designer.cs">
+      <DependentUpon>AgregarMateria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="agregarProfesor.aspx.cs">
+      <DependentUpon>agregarProfesor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="agregarProfesor.aspx.designer.cs">
+      <DependentUpon>agregarProfesor.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

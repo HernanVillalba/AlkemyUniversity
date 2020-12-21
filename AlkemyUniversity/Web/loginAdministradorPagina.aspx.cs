@@ -9,14 +9,13 @@ using Negocio;
 
 namespace Web
 {
-    public partial class loginAdministradorPagina : System.Web.UI.Page
+    public partial class loginAdministradorPagina2 : System.Web.UI.Page
     {
-        
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["ID"] != null)
+            if (Session["ID"] != null)
             {
-                if((bool)Session["AdminBool"] == true)
+                if ((bool)Session["AdminBool"] == true)
                 {
                     //si quiere volver a ingresar ya habiendose logueado antes como
                     //admin, lo redirijo a su menú.
@@ -43,11 +42,8 @@ namespace Web
 
 
             //me devuelve id=0 si no son correctos los datos ingresados
-            LogIn(negocio.Login(admin)); 
-
-            
+            LogIn(negocio.Login(admin));
         }
-        
         private void LogIn(Administrator admin)
         {
             if (admin.ID != 0 || admin.user.admin)

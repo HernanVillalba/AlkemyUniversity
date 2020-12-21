@@ -17,6 +17,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!--Bootstrap 4-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/misEstilos.css" />
 
     <style>
         .centrado {
@@ -27,6 +28,11 @@
 
         .primary-color {
             background-color: #65d6ce;
+        }
+        
+        .cancelar-color{
+            background-color: #ff4646;
+            border-color: #ff4646;
         }
 
     </style>
@@ -53,18 +59,6 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="#">Pagina1</a></li>
-                        <li><a runat="server" href="#">Pagina2</a></li>
-                        <li><a runat="server" href="#">Pagina3</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

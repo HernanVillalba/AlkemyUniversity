@@ -1,0 +1,10 @@
+﻿.centrado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primary-color {
+    background-color: #65d6ce;
+    border-color: #65d6ce;
+}

@@ -51,5 +51,30 @@ namespace Negocio
             }
             return admin;
         }
+
+        public bool AgregarNuevoProfesor(Teacher teacher)
+        {
+            connection = new SqlConnection(DS_User);
+            command = new SqlCommand("SP_NewTeacher", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@dni", teacher.person.DNI);
+            command.Parameters.AddWithValue("@lastName", teacher.person.Lastname);
+            command.Parameters.AddWithValue("@names", teacher.person.Names);
+            command.Parameters.AddWithValue("@active", teacher.active);
+
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+            }
+            catch (SqlException)
+            {
+                connection.Close();
+                return false;
+            }
+
+            return true;
+        }
     }
 }

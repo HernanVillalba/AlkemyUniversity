@@ -1,32 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="loginAdministradorPagina.aspx.cs" Inherits="Web.loginAdministradorPagina" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- CSS only -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-
-    <title>Acceso Administrador</title>
-
-    <style>
-        .centrado {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .primary-color {
-            background-color: #65d6ce;
-            border-color: #65d6ce;
-        }
-    </style>
-
-</head>
-<body>
-    <form runat="server">
-        <hr />
+﻿<%@ Page Title="Iniciar sesión Administrador" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="loginAdministradorPagina.aspx.cs" Inherits="Web.loginAdministradorPagina2" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+     <hr />
         <div class="centrado">
             <div class="centrado" style="background-color: rgb(242,242,242); border-radius: 10px; width: 600px;">
                 <h1>Iniciar sesión - Administrador</h1>
@@ -58,9 +32,4 @@
                 </div>
             </div>
         </div>
-
-    </form>
-
-
-</body>
-</html>
+</asp:Content>

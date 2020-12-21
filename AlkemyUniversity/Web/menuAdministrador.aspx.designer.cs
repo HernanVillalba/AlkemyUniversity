@@ -11,7 +11,7 @@ namespace Web
 {
 
 
-    public partial class menuAdministrador
+    public partial class menuAdministrador2
     {
 
         /// <summary>
