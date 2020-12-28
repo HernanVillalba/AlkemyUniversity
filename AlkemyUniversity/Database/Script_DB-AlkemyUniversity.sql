@@ -10,7 +10,7 @@ GO
 CREATE TABLE Subjects(
 ID int not null identity(1,1),
 Subject_Name varchar(100) not null,
-Places_Available int not null,
+Places_Available int null,
 Maximum_Capacity int not null
 )
 GO 
@@ -23,8 +23,8 @@ GO
 CREATE TABLE Schedules(
 ID_Subject int not null,
 Day varchar(100) not null,
-Start_Time time not null,
-End_Time time not null
+Start_Time varchar(6) not null,
+End_Time varchar(6) not null
 )
 GO
 ALTER TABLE Schedules
@@ -142,3 +142,12 @@ VALUES (1)
 GO
 INSERT INTO Administrator(User_ID,Password)
 VALUES (1,'admin') 
+GO
+INSERT INTO Subjects(Subject_Name,Maximum_Capacity)
+VALUES('Pro I',30)
+GO
+INSERT INTO Teachers(Lastname,Names,DNI,Active)
+VALUES ('Lopez', 'Juan andres', 2020, 1)
+GO
+INSERT INTO Teachers_by_Subject(Subject_ID, Teacher_ID)
+VALUES(1,1)

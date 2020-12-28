@@ -11,9 +11,9 @@ namespace Dominio
 {
     public class Schedules
     {
-        public string Day { get; set; }
-        public SqlDateTime StartTime { get; set; }
-        public SqlDateTime EndTime { get; set; }
+        public string day { get; set; }
+        public string start_time { get; set; }
+        public string end_time { get; set; }
 
         public Schedules()
         {

@@ -11,7 +11,7 @@ namespace Web
 {
 
 
-    public partial class administrarMateria2
+    public partial class administrarMaterias
     {
 
         /// <summary>

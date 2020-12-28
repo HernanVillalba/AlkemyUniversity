@@ -9,8 +9,11 @@ namespace Dominio
     public class Teacher
     {
         public int ID { get; set; }
-        public Person person { set; get; }
+        public int DNI { get; set; }
+        public string lastname { get; set; }
+        public string names { get; set; }
         public bool active { get; set; }
+        public string fullname { get; set; } //para llenar el drop de agregar materia.
 
         public Teacher()
         {
@@ -18,10 +21,9 @@ namespace Dominio
         }
         public Teacher(int DNI, string lastName, string names, bool active)
         {
-            person = new Person();
-            this.person.DNI = DNI;
-            this.person.Lastname = lastName;
-            this.person.Names = names;
+            this.DNI = DNI;
+            this.lastname = lastName;
+            this.names = names;
             this.active = active;
         }
     }

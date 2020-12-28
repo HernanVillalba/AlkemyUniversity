@@ -4,14 +4,12 @@
             <div class="jumbotron" style="background-color: black; width: auto; opacity: 0.9;">
                 <div class="row">
                     <div class="col">
-                        <a href="administrarMateria.aspx">
+                        <a href="administrarMaterias.aspx">
                             <div class="card" style="width: 18rem;">
                                 <div class="card-header centrado">
                                     <h3>Materias</h3>
                                 </div>
-                                <a href="administrarMaterias.aspx">
                                     <img class="card-img-top" src="https://wpd.ugr.es/~emiro/wp-content/uploads/Icono-material-298x300.png" alt="Materias" />
-                                </a>
                             </div>
                         </a>
                     </div>

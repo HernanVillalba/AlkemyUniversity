@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administrator.cs" />
-    <Compile Include="Object.cs" />
+    <Compile Include="Subject.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedules.cs" />

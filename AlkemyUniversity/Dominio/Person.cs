@@ -9,8 +9,8 @@ namespace Dominio
     public class Person
     {
         public int DNI { get; set; }
-        public string Lastname { get; set; }
-        public string Names { get; set; }
+        public string lastname { get; set; }
+        public string names { get; set; }
 
         public Person()
         {
