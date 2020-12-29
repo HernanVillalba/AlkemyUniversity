@@ -16,6 +16,90 @@ namespace Negocio
         SqlCommand command;
         SqlDataReader reader;
 
+        public bool ActualizarProfesor(Teacher teacher)
+        {
+            connection = new SqlConnection(DS_User);
+            command = new SqlCommand("SP_Update_Teacher", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@teacher_id", teacher.ID);
+            command.Parameters.AddWithValue("@lastname", teacher.lastname);
+            command.Parameters.AddWithValue("@names", teacher.names);
+            command.Parameters.AddWithValue("@dni", teacher.DNI);
+            command.Parameters.AddWithValue("@active", teacher.active);
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public Teacher BuscarProfesorPorID(int ID)
+        {
+            connection = new SqlConnection(DS_User);
+            command = new SqlCommand("SP_Search_Teacher_by_ID", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@id", ID);
+            Teacher aux = new Teacher();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    aux.ID = reader.GetInt32(0);
+                    aux.lastname = reader.GetString(1);
+                    aux.names = reader.GetString(2);
+                    aux.DNI = reader.GetInt32(3);
+                    aux.active = reader.GetBoolean(4);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                aux = null;
+                throw;
+            }
+            return aux;
+        }
+        public List<Teacher> ListarBusquedaProfesores(string keyword)
+        {
+            connection = new SqlConnection(DS_User);
+            command = new SqlCommand("SP_Teachers_Search", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@keyword", keyword);
+            List<Teacher> lista = new List<Teacher>();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Teacher aux = new Teacher();
+                    aux.ID = reader.GetInt32(0);
+                    aux.lastname = reader.GetString(1);
+                    aux.names = reader.GetString(2);
+                    aux.DNI = reader.GetInt32(3);
+                    aux.active = reader.GetBoolean(4);
+                    aux.number_subjects = reader.GetInt32(5);
+                    lista.Add(aux);
+                }
+
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+            }
+            return lista;
+        }
+
         public List<Teacher> ListarProfesores()
         {
             //vista

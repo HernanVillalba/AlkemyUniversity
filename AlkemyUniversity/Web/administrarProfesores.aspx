@@ -9,10 +9,12 @@
             <div class="jumbotron">
                 <div class="form-inline centrado">
                     <asp:TextBox ID="tbBuscar" runat="server" CssClass="form-control" />
-                    <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-primary" />
+                    <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
                 </div>
 
             </div>
+            <%if (listaTeachers != null && listaTeachers.Count() > 0)
+                {%>
             <table class="table">
                 <tr>
                     <td>Apellido y nombre</td>
@@ -24,24 +26,31 @@
                 <%foreach (var item in listaTeachers)
                     {%>
                 <tr>
-                    <td><%=item.lastname +" "+item.names %></td>
+                    <td><%=item.lastname + " " + item.names %></td>
                     <td><%=item.DNI %></td>
                     <%if (item.active)
                         { %>
                     <td>Si</td>
                     <%}
-                    else
-                    {%>
+                        else
+                        {%>
                     <td>No</td>
                     <%} %>
                     <td><%=item.number_subjects %></td>
                     <td>
-                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a href="editarProfesor.aspx?ID=<%=item.ID %>" class="btn btn-primary">Editar</a>
                         <a href="#" class="btn btn-primary">Eliminar</a>
                     </td>
                 </tr>
                 <% } %>
             </table>
+            <%}
+                else
+                {%>
+            <div class="alert alert-secondary" role="alert">
+                <h4 class="alert-heading">No hay profesores para mostrar.</h4>
+            </div>
+            <%} %>
         </div>
         <div class="centrado">
             <a href="menuAdministrador.aspx" class="btn btn-primary">Volver al menú</a>

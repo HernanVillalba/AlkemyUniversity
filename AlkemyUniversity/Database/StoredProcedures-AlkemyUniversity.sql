@@ -135,17 +135,61 @@ END
 GO
 
 CREATE VIEW VW_List_Teachers
-Select T.ID,T.Lastname,T.Names,T.DNI,T.Active,
+AS
+SELECT T.ID,T.Lastname,T.Names,T.DNI,T.Active,
 (
-select count(TBS.Teacher_ID) from Teachers_by_Subject as TBS
-where TBS.Teacher_ID = T.ID
-) as 'Cantidad de materias'
-from Teachers AS T
+SELECT count(TBS.Teacher_ID) FROM Teachers_by_Subject AS TBS
+WHERE TBS.Teacher_ID = T.ID
+) AS 'Cantidad de materias'
+FROM Teachers AS T
 
+GO
 
-select*from 
+CREATE PROCEDURE SP_Teachers_Search(
+@keyword varchar(100)
+)
+AS
+BEGIN
+	SELECT*FROM VW_List_Teachers AS VW
+	WHERE VW.Lastname LIKE '%'+@keyword+'%' OR
+	VW.Names LIKE '%'+@keyword+'%' OR
+	VW.DNI LIKE '%'+@keyword+'%'
+END
 
+GO
 
+CREATE PROCEDURE SP_Search_Teacher_by_ID(
+@id int
+)
+AS
+BEGIN
+	SELECT*FROM VW_List_Teachers AS VW
+	WHERE VW.ID = @id
+END
 
+GO
 
-
+CREATE PROCEDURE SP_Update_Teacher(
+@teacher_id int,
+@lastname varchar(100),
+@names varchar(100),
+@dni int,
+@active bit
+)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			UPDATE Teachers
+			SET Lastname = @lastname,
+			Names = @names,
+			DNI = @dni,
+			Active = @active
+			WHERE ID = @teacher_id
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('No se pudo actualizar los datos del profesor.',16,1);
+	END CATCH
+END

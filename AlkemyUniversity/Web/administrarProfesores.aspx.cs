@@ -15,8 +15,20 @@ namespace Web
         public List<Teacher> listaTeachers = new List<Teacher>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            negocio = new AdminNegocio();
-            listaTeachers = negocio.ListarProfesores();
+            if (!IsPostBack)
+            {
+                negocio = new AdminNegocio();
+                listaTeachers = negocio.ListarProfesores();
+            }
+
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            negocio = new AdminNegocio();
+            listaTeachers = negocio.ListarBusquedaProfesores(tbBuscar.Text);
+            tbBuscar.Text = "";
+        }
+
     }
 }
