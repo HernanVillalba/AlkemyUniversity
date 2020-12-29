@@ -16,6 +16,108 @@ namespace Negocio
         SqlCommand command;
         SqlDataReader reader;
 
+        public List<Teacher> ListarProfesores()
+        {
+            //vista
+            connection = new SqlConnection(DS_User);
+            command = new SqlCommand("select*from VW_List_Teachers order by Lastname asc, Names asc", connection); //vista
+            List<Teacher> lista = new List<Teacher>();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Teacher aux = new Teacher();
+                    aux.ID = reader.GetInt32(0);
+                    aux.lastname = reader.GetString(1);
+                    aux.names = reader.GetString(2);
+                    aux.DNI = reader.GetInt32(3);
+                    aux.active = reader.GetBoolean(4);
+                    aux.number_subjects = reader.GetInt32(5);
+                    lista.Add(aux);
+                }
+
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+                throw;
+            }
+            return lista;
+
+        }
+
+        public List<Subject_info> ListarBusquedaMaterias(string keyword)
+        {
+            connection = new SqlConnection(DS_User);
+            command = new SqlCommand("SP_Subject_Search", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@keyword", keyword);
+            List<Subject_info> lista = new List<Subject_info>();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Subject_info aux = new Subject_info();
+                    aux.subject.ID = reader.GetInt32(0);
+                    aux.subject.name = reader.GetString(1);
+                    aux.subject.places_available = reader.GetInt32(2);
+                    aux.subject.maximum_capacity = reader.GetInt32(3);
+                    aux.teacher.ID = reader.GetInt32(4);
+                    aux.teacher.lastname = reader.GetString(5);
+                    aux.teacher.names = reader.GetString(6);
+                    aux.subject.schedules.day = reader.GetString(7);
+                    aux.subject.schedules.start_time = reader.GetString(8);
+                    aux.subject.schedules.end_time = reader.GetString(9);
+                    lista.Add(aux);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+                throw;
+            }
+            return lista;
+        }
+        public List<Subject_info> ListarInfoMaterias()
+        {
+            connection = new SqlConnection(DS_User);
+            command = new SqlCommand("select*from VW_Subject_Info AS VW order by VW.Subject_Name", connection);
+            List<Subject_info> lista = new List<Subject_info>();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Subject_info aux = new Subject_info();
+                    aux.subject.ID = reader.GetInt32(0);
+                    aux.subject.name = reader.GetString(1);
+                    aux.subject.places_available = reader.GetInt32(2);
+                    aux.subject.maximum_capacity = reader.GetInt32(3);
+                    aux.teacher.ID = reader.GetInt32(4);
+                    aux.teacher.lastname = reader.GetString(5);
+                    aux.teacher.names = reader.GetString(6);
+                    aux.subject.schedules.day = reader.GetString(7);
+                    aux.subject.schedules.start_time = reader.GetString(8);
+                    aux.subject.schedules.end_time = reader.GetString(9);
+                    lista.Add(aux);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+                throw;
+            }
+            return lista;
+        }
+
         public bool AgregarNuevaMateria(Subject subject, int Teacher_ID)
         {
             bool guardo;
@@ -45,7 +147,7 @@ namespace Negocio
         public List<Teacher> ListarProfesoresActivos()
         {
             connection = new SqlConnection(DS_User);
-            command = new SqlCommand("SELECT*FROM VW_Teachers_Activos", connection);
+            command = new SqlCommand("SELECT*FROM VW_Ative_Teachers", connection);
             List<Teacher> lista = new List<Teacher>();
             try
             {

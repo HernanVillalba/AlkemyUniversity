@@ -14,6 +14,7 @@ namespace Dominio
         public string names { get; set; }
         public bool active { get; set; }
         public string fullname { get; set; } //para llenar el drop de agregar materia.
+        public int number_subjects { get; set; }
 
         public Teacher()
         {
