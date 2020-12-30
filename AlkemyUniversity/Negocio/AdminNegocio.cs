@@ -11,14 +11,137 @@ namespace Negocio
 {
     public class AdminNegocio
     {
-        private string DS_User = "data source=.\\SQLEXPRESS; initial catalog=AlkemyUniversity; integrated security=true;";
-        SqlConnection connection;
+        private static string DS_User = "data source=.\\SQLEXPRESS; initial catalog=AlkemyUniversity; integrated security=true;";
+        SqlConnection connection = new SqlConnection(DS_User);
         SqlCommand command;
         SqlDataReader reader;
 
+        public bool EliminarProfesorDeLaAsignatura(int subject_id, int teacher_id)
+        {
+            bool elimino;
+            command = new SqlCommand("SP_Delete_Teacher_From_Subject", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@subject_id", subject_id);
+            command.Parameters.AddWithValue("@teacher_id", teacher_id);
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+                elimino = true;
+            }
+            catch (Exception)
+            {
+                elimino = false;
+            }
+            return elimino;
+        }
+
+        public bool EliminarHorario(int schedule_id)
+        {
+            bool elimino;
+            command = new SqlCommand("SP_Delete_Schedule", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@schedule_id", schedule_id);
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+                elimino = true;
+            }
+            catch (Exception)
+            {
+                elimino = false;
+            }
+            return elimino;
+        }
+
+        public bool ActualizarDatosMateria(Subject subject, int oldTeacherID, int newTeacherID)
+        {
+            bool guardo;
+            command = new SqlCommand("SP_Update_Subject", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@subject_id", subject.ID);
+            command.Parameters.AddWithValue("@subject_name", subject.name);
+            command.Parameters.AddWithValue("@maximum_capacity", subject.maximum_capacity);
+            command.Parameters.AddWithValue("@old_teacher_id", oldTeacherID);
+            command.Parameters.AddWithValue("@new_teacher_id", newTeacherID);
+
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+                guardo = true;
+            }
+            catch (SqlException)
+            {
+                guardo = false;
+            }
+
+            return guardo;
+        }
+
+        public bool GuardarHorarioMateria(Schedules schedules, int SubjectID)
+        {
+            bool guardo;
+            command = new SqlCommand("SP_Save_Schedule", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@subject_id", SubjectID);
+            command.Parameters.AddWithValue("@day", schedules.day);
+            command.Parameters.AddWithValue("@start_time", schedules.start_time);
+            command.Parameters.AddWithValue("@end_time", schedules.end_time);
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+                guardo = true;
+            }
+            catch (Exception)
+            {
+                guardo = false;
+            }
+            return guardo;
+        }
+
+        public Subject_info BuscarMateriaPorID(int MateriaID)
+        {
+
+            command = new SqlCommand("SP_Search_Subject_by_ID", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@subject_id", MateriaID);
+            Subject_info aux = new Subject_info();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    aux.subject.ID = reader.GetInt32(0);
+                    aux.subject.name = reader.GetString(1);
+                    aux.subject.places_available = reader.GetInt32(2);
+                    aux.subject.maximum_capacity = reader.GetInt32(3);
+                    aux.teacher.ID = reader.GetInt32(4);
+                    aux.teacher.lastname = reader.GetString(5);
+                    aux.teacher.names = reader.GetString(6);
+                    aux.subject.schedules.day = reader.GetString(7);
+                    aux.subject.schedules.start_time = reader.GetTimeSpan(8);
+                    aux.subject.schedules.end_time = reader.GetTimeSpan(9);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                aux = null;
+                throw;
+            }
+            return aux;
+        }
+
         public bool ActualizarProfesor(Teacher teacher)
         {
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SP_Update_Teacher", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@teacher_id", teacher.ID);
@@ -42,7 +165,6 @@ namespace Negocio
 
         public Teacher BuscarProfesorPorID(int ID)
         {
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SP_Search_Teacher_by_ID", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@id", ID);
@@ -70,7 +192,6 @@ namespace Negocio
         }
         public List<Teacher> ListarBusquedaProfesores(string keyword)
         {
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SP_Teachers_Search", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@keyword", keyword);
@@ -103,7 +224,6 @@ namespace Negocio
         public List<Teacher> ListarProfesores()
         {
             //vista
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("select*from VW_List_Teachers order by Lastname asc, Names asc", connection); //vista
             List<Teacher> lista = new List<Teacher>();
             try
@@ -135,7 +255,6 @@ namespace Negocio
 
         public List<Subject_info> ListarBusquedaMaterias(string keyword)
         {
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SP_Subject_Search", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@keyword", keyword);
@@ -155,8 +274,8 @@ namespace Negocio
                     aux.teacher.lastname = reader.GetString(5);
                     aux.teacher.names = reader.GetString(6);
                     aux.subject.schedules.day = reader.GetString(7);
-                    aux.subject.schedules.start_time = reader.GetString(8);
-                    aux.subject.schedules.end_time = reader.GetString(9);
+                    aux.subject.schedules.start_time = reader.GetTimeSpan(8);
+                    aux.subject.schedules.end_time = reader.GetTimeSpan(9);
                     lista.Add(aux);
                 }
                 connection.Close();
@@ -168,10 +287,48 @@ namespace Negocio
             }
             return lista;
         }
+
+        public List<Schedules> listarHorariosPorMateria(int subjectID)
+        {
+            //creo nuevos objetos para que no haya errores
+            //al recorrer las listas de horarios por materia
+            SqlConnection connection1 = new SqlConnection(DS_User);
+            SqlCommand command1 = new SqlCommand("SP_List_Schedules_by_ID", connection1);
+            command1.CommandType = System.Data.CommandType.StoredProcedure;
+            command1.Parameters.AddWithValue("subject_id", subjectID);
+            SqlDataReader reader1;
+            List<Schedules> lista = new List<Schedules>();
+
+            try
+            {
+                connection1.Open();
+                reader1 = command1.ExecuteReader();
+                while (reader1.Read())
+                {
+                    Schedules aux = new Schedules();
+                    aux.ID = reader1.GetInt32(0);
+                    //la columna 1 sería el Subject_ID
+                    aux.day = reader1.GetString(2);
+                    aux.start_time = reader1.GetTimeSpan(3);
+                    aux.end_time = reader1.GetTimeSpan(4);
+                    lista.Add(aux);
+                }
+                connection1.Close();
+
+            }
+            catch (Exception)
+            {
+                lista = null;
+                throw;
+            }
+            return lista;
+        }
+
         public List<Subject_info> ListarInfoMaterias()
         {
-            connection = new SqlConnection(DS_User);
-            command = new SqlCommand("select*from VW_Subject_Info AS VW order by VW.Subject_Name", connection);
+            //para recorrer la tabla de materias
+            string query = "SELECT*FROM VW_Subject_Info ORDER BY Subject_Name ASC, Day ASC, Start_Time ASC, End_Time ASC";
+            command = new SqlCommand(query, connection);
             List<Subject_info> lista = new List<Subject_info>();
             try
             {
@@ -188,8 +345,8 @@ namespace Negocio
                     aux.teacher.lastname = reader.GetString(5);
                     aux.teacher.names = reader.GetString(6);
                     aux.subject.schedules.day = reader.GetString(7);
-                    aux.subject.schedules.start_time = reader.GetString(8);
-                    aux.subject.schedules.end_time = reader.GetString(9);
+                    aux.subject.schedules.start_time = reader.GetTimeSpan(8);
+                    aux.subject.schedules.end_time = reader.GetTimeSpan(9);
                     lista.Add(aux);
                 }
                 connection.Close();
@@ -205,14 +362,13 @@ namespace Negocio
         public bool AgregarNuevaMateria(Subject subject, int Teacher_ID)
         {
             bool guardo;
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SP_New_Subject", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@subject_name", subject.name);
             command.Parameters.AddWithValue("@maximum_capacity", subject.maximum_capacity);
             command.Parameters.AddWithValue("@day", subject.schedules.day);
             command.Parameters.AddWithValue("@start_time", subject.schedules.start_time);
-            command.Parameters.AddWithValue("@end_time",subject.schedules.end_time);
+            command.Parameters.AddWithValue("@end_time", subject.schedules.end_time);
             command.Parameters.AddWithValue("@teacher_id", Teacher_ID);
             try
             {
@@ -227,10 +383,9 @@ namespace Negocio
             }
             return guardo;
         }
-        
+
         public List<Teacher> ListarProfesoresActivos()
         {
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SELECT*FROM VW_Ative_Teachers", connection);
             List<Teacher> lista = new List<Teacher>();
             try
@@ -262,7 +417,6 @@ namespace Negocio
         public Administrator Login(Administrator admin)
         {
             //configuro la conexion y el comando.
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SP_Login_Admin", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure; //procedimiento almacenado
             command.Parameters.AddWithValue("@id", admin.ID);
@@ -297,7 +451,6 @@ namespace Negocio
 
         public bool AgregarNuevoProfesor(Teacher teacher)
         {
-            connection = new SqlConnection(DS_User);
             command = new SqlCommand("SP_New_Teacher", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@dni", teacher.DNI);

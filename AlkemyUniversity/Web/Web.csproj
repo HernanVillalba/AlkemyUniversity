@@ -107,13 +107,15 @@
   <ItemGroup>
     <Content Include="administrarMaterias.aspx" />
     <Content Include="administrarProfesores.aspx" />
-    <Content Include="AgregarMateria.aspx" />
+    <Content Include="agregarMateria.aspx" />
     <Content Include="agregarProfesor.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="editarMateria.aspx" />
+    <Content Include="editarMateria_horarios.aspx" />
     <Content Include="editarProfesor.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -181,12 +183,12 @@
     <Compile Include="administrarProfesores.aspx.designer.cs">
       <DependentUpon>administrarProfesores.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AgregarMateria.aspx.cs">
-      <DependentUpon>AgregarMateria.aspx</DependentUpon>
+    <Compile Include="agregarMateria.aspx.cs">
+      <DependentUpon>agregarMateria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AgregarMateria.aspx.designer.cs">
-      <DependentUpon>AgregarMateria.aspx</DependentUpon>
+    <Compile Include="agregarMateria.aspx.designer.cs">
+      <DependentUpon>agregarMateria.aspx</DependentUpon>
     </Compile>
     <Compile Include="agregarProfesor.aspx.cs">
       <DependentUpon>agregarProfesor.aspx</DependentUpon>
@@ -197,6 +199,20 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="editarMateria.aspx.cs">
+      <DependentUpon>editarMateria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="editarMateria.aspx.designer.cs">
+      <DependentUpon>editarMateria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="editarMateria_horarios.aspx.cs">
+      <DependentUpon>editarMateria_horarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="editarMateria_horarios.aspx.designer.cs">
+      <DependentUpon>editarMateria_horarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="editarProfesor.aspx.cs">
       <DependentUpon>editarProfesor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

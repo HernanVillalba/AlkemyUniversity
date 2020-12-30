@@ -16,7 +16,7 @@
             </div>
             <%if (lista != null && lista.Count() > 0)
                 {%>
-            <table class="table">
+            <table class="table table-bordered">
                 <tr>
                     <td>Nombre</td>
                     <td>Luegares disponibles</td>
@@ -36,7 +36,7 @@
                     <td><%= item.teacher.lastname + " " + item.teacher.names %></td>
                     <td><%= horario %></td>
                     <td>
-                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a href="editarMateria.aspx?ID=<%=item.subject.ID %>" class="btn btn-primary">Editar</a>
                         <a href="#" class="btn btn-primary">Eliminar</a>
                     </td>
                     <%} %>

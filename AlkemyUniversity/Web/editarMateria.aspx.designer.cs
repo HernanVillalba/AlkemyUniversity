@@ -11,7 +11,7 @@ namespace Web
 {
 
 
-    public partial class AgregarMateria
+    public partial class editarMateria
     {
 
         /// <summary>
@@ -33,48 +33,48 @@ namespace Web
         protected global::System.Web.UI.WebControls.TextBox txtCapacidadMax;
 
         /// <summary>
-        /// Control ddlDias.
+        /// Control txtProfesor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDias;
+        protected global::System.Web.UI.WebControls.TextBox txtProfesor;
 
         /// <summary>
-        /// Control txtComienzo.
+        /// Control btnEditarTeacher.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComienzo;
+        protected global::System.Web.UI.WebControls.Button btnEditarTeacher;
 
         /// <summary>
-        /// Control txtFinal.
+        /// Control ddlProfesoresActivos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFinal;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProfesoresActivos;
 
         /// <summary>
-        /// Control ddlProfesores.
+        /// Control lblHorarios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProfesores;
+        protected global::System.Web.UI.WebControls.Label lblHorarios;
 
         /// <summary>
-        /// Control btnAgregar.
+        /// Control btnGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

@@ -9,7 +9,7 @@ USE AlkemyUniversity
 GO
 CREATE TABLE Subjects(
 ID int not null identity(1,1),
-Subject_Name varchar(100) not null,
+Subject_Name varchar(100) not null unique,
 Places_Available int null,
 Maximum_Capacity int not null
 )
@@ -21,17 +21,18 @@ ADD CONSTRAINT PK_Subjects_ID PRIMARY KEY(ID)
 
 GO
 CREATE TABLE Schedules(
-ID_Subject int not null,
+ID int not null identity(1,1),
+Subject_ID int not null,
 Day varchar(100) not null,
-Start_Time varchar(6) not null,
-End_Time varchar(6) not null
+Start_Time time not null,
+End_Time time not null
 )
 GO
 ALTER TABLE Schedules
-ADD CONSTRAINT PK_Schedules_IDSubject PRIMARY KEY(ID_Subject)
+ADD CONSTRAINT PK_Schedules_IDSubject PRIMARY KEY(ID)
 GO
 ALTER TABLE Schedules
-ADD CONSTRAINT FK_Schedules_IDSubject FOREIGN KEY(ID_SUbject) REFERENCES Subjects(ID)
+ADD CONSTRAINT FK_Schedules_IDSubject FOREIGN KEY(SUbject_ID) REFERENCES Subjects(ID)
 
 -------------------------
 
@@ -89,16 +90,16 @@ ADD CONSTRAINT FK_Students_IDUser FOREIGN KEY(User_ID) REFERENCES Users(ID)
 
 GO
 CREATE TABLE Inscriptions_by_Student(
-ID_Subject int not null,
+Subject_ID int not null,
 Student_Docket int not null,
 Enrollment_Date datetime not null
 )
 GO
 ALTER TABLE Inscriptions_by_Student
-ADD CONSTRAINT PK_InsByStudent_IDSubjIDStud PRIMARY KEY(ID_Subject,Student_Docket)
+ADD CONSTRAINT PK_InsByStudent_IDSubjIDStud PRIMARY KEY(Subject_ID,Student_Docket)
 GO
 ALTER TABLE	Inscriptions_by_Student
-ADD CONSTRAINT FK_InscByStudent_IDSubject FOREIGN KEY(ID_Subject) REFERENCES Subjects(ID)
+ADD CONSTRAINT FK_InscByStudent_IDSubject FOREIGN KEY(Subject_ID) REFERENCES Subjects(ID)
 GO
 ALTER TABLE Inscriptions_by_Student
 ADD CONSTRAINT FK_InscByStudent_StudentDocket FOREIGN KEY(Student_Docket) REFERENCES Students(Docket)
@@ -146,8 +147,21 @@ GO
 INSERT INTO Subjects(Subject_Name,Maximum_Capacity)
 VALUES('Pro I',30)
 GO
+INSERT INTO Subjects(Subject_Name,Maximum_Capacity)
+VALUES('Lab III',90)
+GO
 INSERT INTO Teachers(Lastname,Names,DNI,Active)
 VALUES ('Lopez', 'Juan andres', 2020, 1)
 GO
 INSERT INTO Teachers_by_Subject(Subject_ID, Teacher_ID)
 VALUES(1,1)
+GO
+INSERT INTO Schedules(Subject_ID,Day,Start_Time,End_Time)
+VALUES(1, 'Martes', '21:00', '23:15')
+GO
+INSERT INTO Schedules(Subject_ID,Day,Start_Time,End_Time)
+VALUES(1, 'Viernes', '11:00', '12:30')
+GO
+INSERT INTO Schedules(Subject_ID,Day,Start_Time,End_Time)
+VALUES(2,'Domingo','08:00', '10:00')
+

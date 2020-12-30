@@ -15,7 +15,7 @@
             </div>
             <%if (listaTeachers != null && listaTeachers.Count() > 0)
                 {%>
-            <table class="table">
+            <table class="table table-bordered" style="border-radius:10px; opacity:0.9;">
                 <tr>
                     <td>Apellido y nombre</td>
                     <td>DNI</td>

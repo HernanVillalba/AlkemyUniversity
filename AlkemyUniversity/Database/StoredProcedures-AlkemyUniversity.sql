@@ -40,14 +40,12 @@ from Teachers as T where Active=1
 
 GO
 
-exec SP_New_Subject 'PRO ppp', 350,'miercoles','20:00', '22:15', 2
-
 CREATE PROCEDURE SP_New_Subject(
 @subject_name varchar(100),
 @maximum_capacity int,
 @day varchar(100),
-@start_time varchar(6),
-@end_time varchar(6),
+@start_time time,
+@end_time time,
 @teacher_id int
 )
 AS
@@ -59,7 +57,7 @@ BEGIN
 			DECLARE @ultID int
 			SET @ultID = @@IDENTITY
 
-			INSERT INTO Schedules(ID_Subject,Day,Start_Time,End_Time)
+			INSERT INTO Schedules(Subject_ID,Day,Start_Time,End_Time)
 			VALUES(@ultID, @day, @start_time, @end_time)
 
 			INSERT INTO Teachers_by_Subject(Subject_ID,Teacher_ID)
@@ -90,20 +88,25 @@ GO
 
 CREATE VIEW VW_Subject_Info
 AS
-SELECT S.ID AS Subject_ID,
-	   S.Subject_Name,
-	   ISNULL(S.Places_Available,S.Maximum_Capacity) AS Places_Availables,
-	   S.Maximum_Capacity,
-	   T.ID AS Teacher_ID,
-	   T.Lastname, 
-	   T.Names, 
-	   SCH.Day, 
-	   SCH.Start_Time,
-	   SCH.End_Time
+SELECT ISNULL(S.ID, 0) AS Subject_ID,
+	   ISNULL(S.Subject_Name, '---') AS Subject_Name,
+	   ISNULL(S.Places_Available,ISNULL(S.Maximum_Capacity,0)) AS Places_Availables,
+	   ISNULL(S.Maximum_Capacity,0) AS Maximum_Capacity,
+	   ISNULL(T.ID, 0) AS Teacher_ID,
+	   ISNULL(T.Lastname, '---') AS Lastname, 
+	   ISNULL(T.Names, '---') AS Names, 
+	   ISNULL(SCH.Day, '---') AS Day,
+	   ISNULL(SCH.Start_Time,'00:00') AS Start_Time,
+	   ISNULL(SCH.End_Time,'00:00') AS End_Time
 FROM Subjects AS S
-join Teachers_by_Subject AS tbs ON TBS.Subject_ID = S.ID
-join Teachers AS T ON T.ID = TBS.Teacher_ID
-join Schedules AS SCH ON SCH.ID_Subject = S.ID
+full join Teachers_by_Subject AS tbs ON TBS.Subject_ID = S.ID
+left join Teachers AS T ON T.ID = TBS.Teacher_ID
+left join Schedules AS SCH ON SCH.Subject_ID = S.ID
+
+GO
+
+SELECT*FROM VW_Subject_Info 
+ORDER BY Subject_Name ASC, Day ASC, Start_Time ASC, End_Time ASC 
 
 GO
 
@@ -112,24 +115,11 @@ CREATE PROCEDURE SP_Subject_Search(
 )
 AS
 BEGIN
-	SELECT S.ID AS Subject_ID,
-		   S.Subject_Name,
-		   ISNULL(S.Places_Available,S.Maximum_Capacity) AS Places_Availables,
-		   S.Maximum_Capacity,
-		   T.ID AS Teacher_ID,
-		   T.Lastname, 
-		   T.Names, 
-		   SCH.Day, 
-		   SCH.Start_Time,
-		   SCH.End_Time
-	FROM Subjects AS S
-	join Teachers_by_Subject AS tbs ON TBS.Subject_ID = S.ID
-	join Teachers AS T ON T.ID = TBS.Teacher_ID
-	join Schedules AS SCH ON SCH.ID_Subject = S.ID
-	WHERE S.Subject_Name like '%'+ @keyword + '%' OR
-		  T.Lastname like '%'+ @keyword + '%' or
-		  T.Names like '%'+ @keyword + '%' OR
-		  SCH.Day like '%'+ @keyword + '%'
+	SELECT * FROM VW_Subject_Info AS VW
+	WHERE VW.Subject_Name like '%'+ @keyword + '%' OR
+		  VW.Lastname like '%'+ @keyword + '%' or
+		  VW.Names like '%'+ @keyword + '%' OR
+		  VW.Day like '%'+ @keyword + '%'
 END
 
 GO
@@ -193,3 +183,102 @@ BEGIN
 		RAISERROR('No se pudo actualizar los datos del profesor.',16,1);
 	END CATCH
 END
+
+GO
+
+CREATE PROCEDURE SP_Search_Subject_by_ID( @subject_id int )
+AS
+BEGIN
+	SELECT*FROM VW_Subject_Info AS VW
+	WHERE VW.Subject_ID = @subject_id
+END
+
+GO
+
+CREATE PROCEDURE SP_List_Schedules_by_ID(
+	@subject_id int
+)
+AS
+BEGIN
+	SELECT*FROM Schedules WHERE Subject_ID = @subject_id
+	ORDER BY Day ASC, Start_Time ASC, End_Time ASC 
+END
+
+GO
+
+CREATE PROCEDURE SP_Save_Schedule(
+	@subject_id int,
+	@day varchar(100),
+	@start_time time,
+	@end_time time
+)
+AS
+BEGIN
+	INSERT INTO Schedules(Subject_ID,Day,Start_Time,End_Time)
+	VALUES (@subject_id,@day,@start_time,@end_time)
+END
+
+GO
+
+CREATE PROCEDURE SP_Update_Subject(
+	@subject_id int,
+	@subject_name varchar(100),
+	@maximum_capacity int,
+	@old_teacher_id	int,
+	@new_teacher_id int
+)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			UPDATE Subjects
+			SET Subject_Name = @subject_name,
+			Maximum_Capacity = @maximum_capacity
+			WHERE ID = @subject_id
+			IF(@old_teacher_id = 0)
+				BEGIN
+					INSERT INTO Teachers_by_Subject(Subject_ID,Teacher_ID)
+					VALUES (@subject_id, @new_teacher_id)
+				END
+			ELSE
+				BEGIN
+					UPDATE Teachers_by_Subject
+					SET Teacher_ID = @new_teacher_id
+					WHERE Subject_ID = @subject_id AND
+					Teacher_ID = @old_teacher_id
+				END
+		COMMIT TRANSACTION
+	END TRY
+
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('No se pudo actualizar los datos de la materia.',16,1);
+	END CATCH
+END
+
+GO
+
+CREATE PROCEDURE SP_Delete_Schedule(
+	@schedule_id int
+)
+AS
+BEGIN
+   DELETE FROM Schedules
+   WHERE ID = @schedule_id
+END
+
+GO
+
+CREATE PROCEDURE SP_Delete_Teacher_From_Subject(
+	 @subject_id int,
+	 @teacher_id int
+)
+AS
+BEGIN
+   DELETE FROM Teachers_by_Subject
+   WHERE Subject_ID = @subject_id AND
+   Teacher_ID = @teacher_id
+END
+
+
+

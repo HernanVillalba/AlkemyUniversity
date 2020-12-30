@@ -46,8 +46,8 @@ namespace Web
             sub.name = txtNombre.Text;
             sub.maximum_capacity = Convert.ToInt32(txtCapacidadMax.Text);
             sub.schedules.day = ddlDias.SelectedItem.ToString();
-            sub.schedules.start_time = txtHsComienzo.Text + ":" + txtMinComienzo.Text;
-            sub.schedules.end_time = txtHsFinal.Text + ":" + txtMinFinal.Text;
+            sub.schedules.start_time = TimeSpan.Parse(txtComienzo.Text);
+            sub.schedules.end_time = TimeSpan.Parse(txtFinal.Text);
             int TeacherID = Convert.ToInt32(ddlProfesores.SelectedValue);
             int diaID = Convert.ToInt32(ddlDias.SelectedValue);
 
@@ -63,11 +63,6 @@ namespace Web
                     //si no hay error, vacio los txt
                     txtNombre.Text = "";
                     txtCapacidadMax.Text = "";
-                    txtHsComienzo.Text = "";
-                    txtMinComienzo.Text = "";
-                    txtHsFinal.Text = "";
-                    txtMinFinal.Text = "";
-                    txtMinFinal.Text = "";
                 }
             }
         }

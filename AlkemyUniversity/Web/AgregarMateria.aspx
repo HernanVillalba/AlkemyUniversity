@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Agregar materia" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarMateria.aspx.cs" Inherits="Web.AgregarMateria" %>
+﻿<%@ Page Title="Agregar materia" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="agregarMateria.aspx.cs" Inherits="Web.AgregarMateria" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="centrado">
@@ -49,13 +49,11 @@
                 </div>
                 <div class="form-group">
                     <label>Comienzo: </label>
-                    <asp:TextBox runat="server" ID="txtHsComienzo" CssClass="form-control" />
-                    <asp:TextBox runat="server" ID="txtMinComienzo" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtComienzo" CssClass="form-control" type="time" />
                 </div>
                 <div class="form-group">
                     <label>Finalización: </label>
-                    <asp:TextBox runat="server" ID="txtHsFinal" CssClass="form-control" />
-                    <asp:TextBox runat="server" ID="txtMinFinal" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtFinal" CssClass="form-control" type="time" />
                 </div>
             </div>
             <div class="form-group">

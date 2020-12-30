@@ -11,9 +11,10 @@ namespace Dominio
 {
     public class Schedules
     {
+        public int ID { get; set; }
         public string day { get; set; }
-        public string start_time { get; set; }
-        public string end_time { get; set; }
+        public TimeSpan start_time { get; set; }
+        public TimeSpan end_time { get; set; }
 
         public Schedules()
         {
