@@ -4,26 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Dominio;
 using Negocio;
+using Dominio;
 
 namespace Web
 {
-    public partial class menuAlumno2 : System.Web.UI.Page
+    public partial class alumno_verMisInscripciones : System.Web.UI.Page
     {
         AlumnoNegocio negocio = new AlumnoNegocio();
-        public List<Subject> listaMaterias = new List<Subject>();
-        Student student = new Student();
-        int subjectID;
-        int enroll;
+        public Student student = new Student();
+        public List<Subject> lista_subjects = new List<Subject>();
         protected void Page_Load(object sender, EventArgs e)
         {
             Redireccionar();
             CargarVariables();
-            if (subjectID > 0 && enroll == 1)
-            {
-                IncrirseAMateria();
-            }
         }
 
         protected void Redireccionar()
@@ -38,28 +32,14 @@ namespace Web
             }
         }
 
-        protected void IncrirseAMateria()
-        {
-            negocio.InscribirAlumnoAMateria(subjectID, student.docket);
-        }
 
         protected void CargarVariables()
         {
             if (Session["ObjetoUsuario"] != null)
             {
                 student = (Student)Session["ObjetoUsuario"];
+                lista_subjects = negocio.ListarMisInscripciones(student.docket);
             }
-
-            listaMaterias = negocio.listarMateriasAlumno();
-            subjectID = Convert.ToInt32(Request.QueryString["subjectID"]);
-            enroll = Convert.ToInt32(Request.QueryString["enroll"]);
-        }
-
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            Session["ObjetoUsuario"] = null;
-            Session["AdminBool"] = null;
-            Response.Redirect("loginAlumno.aspx");
         }
     }
 }

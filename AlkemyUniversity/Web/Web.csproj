@@ -112,6 +112,8 @@
     <Content Include="agregarAlumno.aspx" />
     <Content Include="agregarMateria.aspx" />
     <Content Include="agregarProfesor.aspx" />
+    <Content Include="alumno_detallesMateria.aspx" />
+    <Content Include="alumno_verMisInscripciones.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -220,6 +222,20 @@
     </Compile>
     <Compile Include="agregarProfesor.aspx.designer.cs">
       <DependentUpon>agregarProfesor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="alumno_detallesMateria.aspx.cs">
+      <DependentUpon>alumno_detallesMateria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="alumno_detallesMateria.aspx.designer.cs">
+      <DependentUpon>alumno_detallesMateria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="alumno_verMisInscripciones.aspx.cs">
+      <DependentUpon>alumno_verMisInscripciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="alumno_verMisInscripciones.aspx.designer.cs">
+      <DependentUpon>alumno_verMisInscripciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

@@ -13,6 +13,7 @@ namespace Dominio
         public int places_available { get; set; }
         public int maximum_capacity { get; set; }
         public Schedules schedules { get; set; }
+        public DateTime enrollment_date { get; set; }
 
         public Subject()
         {

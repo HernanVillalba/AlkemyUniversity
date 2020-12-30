@@ -20,11 +20,11 @@
             <div style="width: 20rem; margin: 0 auto;">
                 <div class="form-group">
                     <label>Legajo: </label>
-                    <asp:TextBox runat="server" ID="txtLegajo" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtLegajo" CssClass="form-control" type="number" />
                 </div>
                 <div class="form-group">
                     <label>DNI: </label>
-                    <asp:TextBox runat="server" ID="txtDNI" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtDNI" CssClass="form-control" type="number" />
                 </div>
                 <div>
                     <asp:Button ID="btnIngresar" Text="Acceder" runat="server" OnClick="btnIngresar_Click" CssClass="btn btn-primary btn-block primary-color" />

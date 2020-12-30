@@ -55,7 +55,7 @@
                     foreach (var item in lista_students)
                     {%>
             <tr>
-                <td><%= item.Docket %></td>
+                <td><%= item.docket %></td>
                 <td><%= item.person.lastname %></td>
                 <td><%= item.person.names %></td>
                 <td><%= item.person.DNI %></td>

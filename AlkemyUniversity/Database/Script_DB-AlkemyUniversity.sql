@@ -145,10 +145,10 @@ INSERT INTO Administrator(User_ID,Password)
 VALUES (1,'admin') 
 GO
 INSERT INTO Subjects(Subject_Name,Maximum_Capacity)
-VALUES('Pro I',30)
+VALUES('Pro I',30,30)
 GO
-INSERT INTO Subjects(Subject_Name,Maximum_Capacity)
-VALUES('Lab III',90)
+INSERT INTO Subjects(Subject_Name,Maximum_Capacity,Places_Available)
+VALUES('Lab III',90,90)
 GO
 INSERT INTO Teachers(Lastname,Names,DNI,Active)
 VALUES ('Lopez', 'Juan andres', 2020, 1)
@@ -164,4 +164,12 @@ VALUES(1, 'Viernes', '11:00', '12:30')
 GO
 INSERT INTO Schedules(Subject_ID,Day,Start_Time,End_Time)
 VALUES(2,'Domingo','08:00', '10:00')
-
+GO
+INSERT INTO Users(Administrator)
+VALUES ('0')
+GO
+DECLARE @ult_id int
+SET @ult_id = @@IDENTITY
+GO 
+INSERT INTO Students (User_ID, Docket)
+VALUES (@ult_id,)

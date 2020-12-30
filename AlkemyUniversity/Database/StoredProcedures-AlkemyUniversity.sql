@@ -52,8 +52,8 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION
-			INSERT INTO Subjects(Subject_Name, Maximum_Capacity)
-			VALUES(@subject_name, @maximum_capacity)
+			INSERT INTO Subjects(Subject_Name, Maximum_Capacity, Places_Available)
+			VALUES(@subject_name, @maximum_capacity, @maximum_capacity)
 			DECLARE @ultID int
 			SET @ultID = @@IDENTITY
 
@@ -203,6 +203,8 @@ BEGIN
 	SELECT*FROM Schedules WHERE Subject_ID = @subject_id
 	ORDER BY Day ASC, Start_Time ASC, End_Time ASC 
 END
+
+Exec SP_List_Schedules_by_ID 2
 
 GO
 
@@ -404,15 +406,30 @@ CREATE PROCEDURE SP_Enroll_in_a_Subject(
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO Inscriptions_by_Student(Subject_ID, Student_Docket,Enrollment_Date)
-		VALUES(@subject_id, @student_docket, GETDATE())
+		BEGIN TRANSACTION
+			INSERT INTO Inscriptions_by_Student(Subject_ID, Student_Docket,Enrollment_Date)
+			VALUES(@subject_id, @student_docket, GETDATE())
+			UPDATE Subjects
+			SET Places_Available = Places_Available-1
+			WHERE ID = @subject_id
+		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRANSACTION
 		RAISERROR('No se pudo inscribir al usuario en la materia seleccionada.',16,1);
 	END CATCH
 END
 
+GO
 
+CREATE PROCEDURE SP_List_my_enrollments(
+	@student_docket int
+)
+AS
+BEGIN
+	select S.Subject_Name, IbS.Enrollment_Date
+	from Inscriptions_by_Student as IbS
+	join Subjects as S on S.ID = IbS.Subject_ID
+	where IbS.Student_Docket = @student_docket
+END
 
-SELECT*FROM Students
-SELECT*FROM Personal_Data
