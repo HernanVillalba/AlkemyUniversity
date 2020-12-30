@@ -13,7 +13,6 @@ namespace Dominio
         public int places_available { get; set; }
         public int maximum_capacity { get; set; }
         public Schedules schedules { get; set; }
-        public List<Schedules> list_schedules { get; set; } //una lista de horarios para cada materia
 
         public Subject()
         {

@@ -372,6 +372,8 @@ END
 -----------------------------------------------------------------------------------------------
 --                                      ALUMNO                                              ---
 
+GO
+
 CREATE PROCEDURE SP_Login_Student(
 	@docket int,
 	@dni int
@@ -386,6 +388,31 @@ BEGIN
 	PD.DNI = @dni
 END
 
+GO
 
-Select*from Students
-select*from Personal_Data
+CREATE VIEW VW_List_Subjects_Student
+AS
+SELECT S.ID, S.Subject_Name
+FROM Subjects AS S
+
+GO
+
+CREATE PROCEDURE SP_Enroll_in_a_Subject(
+	@subject_id int,
+	@student_docket int
+)
+AS
+BEGIN
+	BEGIN TRY
+		INSERT INTO Inscriptions_by_Student(Subject_ID, Student_Docket,Enrollment_Date)
+		VALUES(@subject_id, @student_docket, GETDATE())
+	END TRY
+	BEGIN CATCH
+		RAISERROR('No se pudo inscribir al usuario en la materia seleccionada.',16,1);
+	END CATCH
+END
+
+
+
+SELECT*FROM Students
+SELECT*FROM Personal_Data

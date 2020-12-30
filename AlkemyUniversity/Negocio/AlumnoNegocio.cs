@@ -13,12 +13,38 @@ namespace Negocio
 {
     public class AlumnoNegocio
     {
+        ///////////////////////////////////////ALUMNO///////////////////////////////////////////
         private static string User_DS = "data source=.\\SQLEXPRESS; initial catalog=AlkemyUniversity; integrated security=true;";
-      //private static string DS_User = "data source=.\\SQLEXPRESS; initial catalog=AlkemyUniversity; integrated security=true;";
         SqlConnection connection = new SqlConnection(User_DS);
         SqlCommand command;
         SqlDataReader reader;
-        ///////////////////////////////////////ALUMNO///////////////////////////////////////////
+
+        
+
+        public List<Subject> listarMateriasAlumno()
+        {
+            command = new SqlCommand("SELECT*FROM VW_List_Subjects_Student ORDER BY Subject_Name ASC", connection);
+            List<Subject> lista = new List<Subject>();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Subject aux = new Subject();
+                    aux.ID = reader.GetInt32(0);
+                    aux.name = reader.GetString(1);
+                    lista.Add(aux);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+            }
+            return lista;
+        }
+
         public Student LoginEstudiante(Student student)
         {
             command = new SqlCommand("SP_Login_Student", connection);
