@@ -16,6 +16,9 @@ namespace Negocio
         SqlCommand command;
         SqlDataReader reader;
 
+
+        ///////////////////////////////////////ADMINISTRADOR////////////////////////////////////
+
         public bool RegistrarAlumno(Student student)
         {
             bool guardo;
@@ -74,7 +77,7 @@ namespace Negocio
                 {
                     Student aux = new Student();
                     aux.user.ID = reader.GetInt32(0);
-                    aux.Docket = reader.GetInt32(1);
+                    aux.docket = reader.GetInt32(1);
                     aux.person.lastname = reader.GetString(2);
                     aux.person.names = reader.GetString(3);
                     aux.person.DNI = reader.GetInt32(4);

@@ -10,7 +10,7 @@ namespace Dominio
     {
         public User user { set; get; }
         public Person person { set; get; }
-        public int Docket { set; get; }
+        public int docket { set; get; }
 
         public Student()
         {
@@ -25,6 +25,14 @@ namespace Dominio
             this.person.lastname = lastname;
             this.person.names = names;
             this.person.DNI = dni;
+        }
+        public Student(int docket, int DNI)
+        {
+            //para loguear
+            user = new User();
+            person = new Person();
+            this.docket = docket;
+            this.person.DNI = DNI;
         }
 
     }

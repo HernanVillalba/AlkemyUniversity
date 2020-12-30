@@ -368,3 +368,24 @@ BEGIN
 		RAISERROR('No se pudo registrar al usuario administrador.',16,1);
 	END CATCH
 END
+
+-----------------------------------------------------------------------------------------------
+--                                      ALUMNO                                              ---
+
+CREATE PROCEDURE SP_Login_Student(
+	@docket int,
+	@dni int
+)
+AS
+BEGIN
+	Select U.ID, S.Docket, PD.Lastname, PD.Names, PD.DNI, U.Administrator
+	from Users as U
+	join Personal_Data as PD on PD.User_ID = U.ID
+	join Students as S on S.User_ID = U.ID
+	Where S.Docket = @docket AND
+	PD.DNI = @dni
+END
+
+
+Select*from Students
+select*from Personal_Data
