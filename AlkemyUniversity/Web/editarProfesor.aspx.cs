@@ -16,6 +16,8 @@ namespace Web
         int profesorID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+
             profesorID = Convert.ToInt32(Request.QueryString["ID"]);
             if(profesorID == 0)
             {
@@ -29,6 +31,15 @@ namespace Web
                 }
             }
         }
+
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
+            }
+        }
+
         protected void cargarDatosProfesor()
         {
             teacher = negocio.BuscarProfesorPorID(profesorID);

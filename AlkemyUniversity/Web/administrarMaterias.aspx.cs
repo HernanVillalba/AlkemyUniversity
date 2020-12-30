@@ -15,7 +15,7 @@ namespace Web
         public List<Subject_info> lista = new List<Subject_info>();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Redireccionar();
             if (!IsPostBack)
             {
                 negocio = new AdminNegocio();

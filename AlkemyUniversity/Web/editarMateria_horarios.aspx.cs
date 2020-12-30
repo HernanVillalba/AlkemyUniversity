@@ -18,7 +18,10 @@ namespace Web
         public List<Schedules> lista = new List<Schedules>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+
             CargarVariables();
+
             if (!IsPostBack)
             {
                 if (SubjectID > 0)
@@ -29,6 +32,14 @@ namespace Web
                 {
                     EliminarHorario();
                 }
+            }
+        }
+
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
             }
         }
 

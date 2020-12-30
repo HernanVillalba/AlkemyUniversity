@@ -16,8 +16,19 @@ namespace Web
         public List<Student> lista_students = new List<Student>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+
             CargarListas();
         }
+
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
+            }
+        }
+
         protected void CargarListas()
         {
             lista_admin = negocio.ListarAdministradores();

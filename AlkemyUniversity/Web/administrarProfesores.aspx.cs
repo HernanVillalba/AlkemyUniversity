@@ -15,12 +15,22 @@ namespace Web
         public List<Teacher> listaTeachers = new List<Teacher>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+
             if (!IsPostBack)
             {
                 negocio = new AdminNegocio();
                 listaTeachers = negocio.ListarProfesores();
             }
 
+        }
+
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)

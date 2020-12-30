@@ -14,7 +14,15 @@ namespace Web
         AdminNegocio negocio = new AdminNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+        }
 
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
+            }
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)

@@ -19,6 +19,7 @@ namespace Dominio
         }
         public Student(string lastname, string names, int dni)
         {
+            //para registrar un alumno
             user = new User();
             person = new Person();
             this.person.lastname = lastname;

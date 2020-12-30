@@ -17,11 +17,20 @@ namespace Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+
             if (!IsPostBack)
             {
                 cargarFront();
             }
 
+        }
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
+            }
         }
         protected void cargarFront()
         {

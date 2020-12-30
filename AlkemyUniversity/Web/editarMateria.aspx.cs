@@ -19,7 +19,10 @@ namespace Web
         public int deleteTeacher = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Redireccionar();
+
             CargarVariables();
+            
             if (!IsPostBack)
             {
                 if (SubjectID > 0)
@@ -36,6 +39,15 @@ namespace Web
                 }
             }
         }
+
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
+            }
+        }
+
         protected void EliminarProfesor()
         {
             negocio.EliminarProfesorDeLaAsignatura(SubjectID, TeacherID);
