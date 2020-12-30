@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="administrarMaterias.aspx" />
     <Content Include="administrarProfesores.aspx" />
+    <Content Include="administrarUsuarios.aspx" />
     <Content Include="agregarMateria.aspx" />
     <Content Include="agregarProfesor.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -182,6 +183,13 @@
     </Compile>
     <Compile Include="administrarProfesores.aspx.designer.cs">
       <DependentUpon>administrarProfesores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administrarUsuarios.aspx.cs">
+      <DependentUpon>administrarUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administrarUsuarios.aspx.designer.cs">
+      <DependentUpon>administrarUsuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="agregarMateria.aspx.cs">
       <DependentUpon>agregarMateria.aspx</DependentUpon>

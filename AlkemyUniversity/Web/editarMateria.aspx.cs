@@ -40,7 +40,6 @@ namespace Web
         {
             negocio.EliminarProfesorDeLaAsignatura(SubjectID, TeacherID);
             Response.Redirect("editarMateria.aspx?ID=" + SubjectID);
-            hlEliminar.Visible = false;
         }
 
         protected void CargarVariables()

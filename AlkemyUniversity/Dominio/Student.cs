@@ -14,7 +14,8 @@ namespace Dominio
 
         public Student()
         {
-
+            user = new User();
+            person = new Person();
         }
 
     }

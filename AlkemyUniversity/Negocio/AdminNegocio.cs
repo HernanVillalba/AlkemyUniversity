@@ -16,6 +16,63 @@ namespace Negocio
         SqlCommand command;
         SqlDataReader reader;
 
+        public List<Student> ListarEstudiantes()
+        {
+            command = new SqlCommand("SP_List_Ordered_Student",connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            List<Student> lista = new List<Student>();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Student aux = new Student();
+                    aux.user.ID = reader.GetInt32(0);
+                    aux.Docket = reader.GetInt32(1);
+                    aux.person.lastname = reader.GetString(2);
+                    aux.person.names = reader.GetString(3);
+                    aux.person.DNI = reader.GetInt32(4);
+                    aux.user.admin = reader.GetBoolean(5);
+                    lista.Add(aux);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+            }
+            return lista;
+        }
+
+        public List<Administrator> ListarAdministradores()
+        {
+            command = new SqlCommand("SP_List_Ordered_Admin", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            List<Administrator> lista = new List<Administrator>();
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Administrator aux = new Administrator();
+                    aux.user.ID = aux.ID = reader.GetInt32(0);
+                    aux.person.lastname = reader.GetString(1);
+                    aux.person.names = reader.GetString(2);
+                    aux.person.DNI = reader.GetInt32(3);
+                    aux.user.admin = reader.GetBoolean(4);
+                    lista.Add(aux);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+            }
+            return lista;
+        }
+
         public bool EliminarProfesorDeLaAsignatura(int subject_id, int teacher_id)
         {
             bool elimino;

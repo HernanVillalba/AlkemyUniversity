@@ -280,5 +280,90 @@ BEGIN
    Teacher_ID = @teacher_id
 END
 
+GO
 
+CREATE PROCEDURE SP_Register_Student(
+	@dni int,
+	@lastname varchar(100),
+	@names varchar(100)
+)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+				INSERT INTO Users(Administrator)
+				VALUES ('0')
+				DECLARE @ult_user_id int
+				SET @ult_user_id = @@IDENTITY
+				INSERT INTO Students (User_ID)
+				VALUES (@ult_user_id)
+				INSERT INTO Personal_Data(User_ID,DNI,Lastname,Names)
+				VALUES(@ult_user_id, @dni,@lastname,@names)
+		COMMIT TRANSACTION
+	END TRY
 
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('No se pudo registrar al estudiante.',16,1);
+	END CATCH
+END
+
+GO
+
+CREATE PROCEDURE SP_Register_Admin(
+	@password varchar(100),
+	@dni int,
+	@lastname varchar(100),
+	@names varchar(100)
+)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION
+			INSERT INTO Users(Administrator)
+			VALUES (1)
+			DECLARE @ult_user_id int
+			SET @ult_user_id = @@IDENTITY
+			INSERT INTO Administrator(User_ID, Password)
+			VALUES (@ult_user_id, @password)
+			INSERT INTO Personal_Data(User_ID, DNI, Lastname,Names)
+			VALUES(@ult_user_id, @dni,@lastname,@names)
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+		RAISERROR('No se pudo registrar al usuario administrador.',16,1);
+	END CATCH
+END
+
+GO
+
+CREATE VIEW	VW_List_Student
+AS
+select U.ID, U.Administrator, S.Docket, PD.Lastname, PD.Names, PD.DNI
+from Users as U
+join Personal_Data as PD on PD.User_ID = U.ID
+join Students as S on S.User_ID = U.ID
+
+GO
+
+CREATE VIEW VW_List_Administrators
+AS
+select U.ID, A.Password, PD.Lastname, PD.Names,PD.DNI, U.Administrator
+from Users as U
+join Personal_Data as PD on PD.User_ID = U.ID
+join Administrator as A on A.User_ID = U.ID
+
+GO
+
+CREATE PROCEDURE SP_List_Ordered_Student
+AS
+	SELECT*FROM VW_List_Student AS VW
+	ORDER BY VW.Docket ASC, VW.Lastname ASC, VW.Names ASC
+
+GO
+
+CREATE PROCEDURE SP_List_Ordered_Student
+AS
+	SELECT*FROM VW_List_Administrators AS VW
+	ORDER BY VW.ID,
