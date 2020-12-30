@@ -16,9 +16,54 @@ namespace Negocio
         SqlCommand command;
         SqlDataReader reader;
 
+        public bool RegistrarAlumno(Student student)
+        {
+            bool guardo;
+            command = new SqlCommand("SP_Register_Student", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@dni", student.person.DNI);
+            command.Parameters.AddWithValue("@lastname", student.person.lastname);
+            command.Parameters.AddWithValue("@names", student.person.names);
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+                guardo = true;
+            }
+            catch (Exception)
+            {
+                guardo = false;
+            }
+            return guardo;
+        }
+
+        public bool RegistrarAdministrador(Administrator admin)
+        {
+            bool guardo;
+            command = new SqlCommand("SP_Register_Admin", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@password", admin.password);
+            command.Parameters.AddWithValue("@lastname", admin.person.lastname);
+            command.Parameters.AddWithValue("@names", admin.person.names);
+            command.Parameters.AddWithValue("@dni", admin.person.DNI);
+            try
+            {
+                connection.Open();
+                command.ExecuteReader();
+                connection.Close();
+                guardo = true;
+            }
+            catch (Exception)
+            {
+                guardo = false;
+            }
+            return guardo;
+        }
+
         public List<Student> ListarEstudiantes()
         {
-            command = new SqlCommand("SP_List_Ordered_Student",connection);
+            command = new SqlCommand("SP_List_Ordered_Student", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             List<Student> lista = new List<Student>();
             try

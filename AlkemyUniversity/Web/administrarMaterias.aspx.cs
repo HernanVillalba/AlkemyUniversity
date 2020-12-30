@@ -15,10 +15,18 @@ namespace Web
         public List<Subject_info> lista = new List<Subject_info>();
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 negocio = new AdminNegocio();
                 lista = negocio.ListarInfoMaterias();
+            }
+        }
+        protected void Redireccionar()
+        {
+            if (Session["AdminBool"] == null || !(bool)Session["AdminBool"])
+            {
+                Response.Redirect("loginAdministradorPagina.aspx");
             }
         }
 

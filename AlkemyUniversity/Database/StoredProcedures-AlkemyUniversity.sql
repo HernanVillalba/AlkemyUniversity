@@ -282,6 +282,39 @@ END
 
 GO
 
+CREATE VIEW	VW_List_Student
+AS
+select U.ID, S.Docket, PD.Lastname, PD.Names, PD.DNI, U.Administrator
+from Users as U
+join Personal_Data as PD on PD.User_ID = U.ID
+join Students as S on S.User_ID = U.ID
+
+GO
+
+CREATE VIEW VW_List_Administrators
+AS
+select U.ID, PD.Lastname, PD.Names,PD.DNI, U.Administrator
+from Users as U
+join Personal_Data as PD on PD.User_ID = U.ID
+join Administrator as A on A.User_ID = U.ID
+
+GO
+
+CREATE PROCEDURE SP_List_Ordered_Admin
+AS
+SELECT*FROM VW_List_Administrators AS VW
+ORDER BY VW.ID, VW.Lastname, VW.Names
+
+GO
+
+CREATE PROCEDURE SP_List_Ordered_Student
+AS
+SELECT*FROM VW_List_Student AS VW
+ORDER BY VW.Docket ASC, VW.Lastname ASC, VW.Names ASC
+
+
+GO
+
 CREATE PROCEDURE SP_Register_Student(
 	@dni int,
 	@lastname varchar(100),
@@ -312,9 +345,9 @@ GO
 
 CREATE PROCEDURE SP_Register_Admin(
 	@password varchar(100),
-	@dni int,
 	@lastname varchar(100),
-	@names varchar(100)
+	@names varchar(100),
+	@dni int
 )
 AS
 BEGIN
@@ -335,35 +368,3 @@ BEGIN
 		RAISERROR('No se pudo registrar al usuario administrador.',16,1);
 	END CATCH
 END
-
-GO
-
-CREATE VIEW	VW_List_Student
-AS
-select U.ID, U.Administrator, S.Docket, PD.Lastname, PD.Names, PD.DNI
-from Users as U
-join Personal_Data as PD on PD.User_ID = U.ID
-join Students as S on S.User_ID = U.ID
-
-GO
-
-CREATE VIEW VW_List_Administrators
-AS
-select U.ID, A.Password, PD.Lastname, PD.Names,PD.DNI, U.Administrator
-from Users as U
-join Personal_Data as PD on PD.User_ID = U.ID
-join Administrator as A on A.User_ID = U.ID
-
-GO
-
-CREATE PROCEDURE SP_List_Ordered_Student
-AS
-	SELECT*FROM VW_List_Student AS VW
-	ORDER BY VW.Docket ASC, VW.Lastname ASC, VW.Names ASC
-
-GO
-
-CREATE PROCEDURE SP_List_Ordered_Student
-AS
-	SELECT*FROM VW_List_Administrators AS VW
-	ORDER BY VW.ID,

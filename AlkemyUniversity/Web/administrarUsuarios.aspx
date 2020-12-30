@@ -23,7 +23,9 @@
                 <td><%= item.person.lastname %></td>
                 <td><%= item.person.names %></td>
                 <td><%= item.person.DNI %></td>
-                <td><a href="#" class="btn btn-primary">Dar de baja</a></td>
+                <td>
+                    <!--<a href="#" class="btn btn-primary">Dar de baja</a>ANULADO POR AHORA -->
+                </td>
             </tr>
             <%}
 
@@ -31,7 +33,7 @@
         </table>
     </div>
     <div class="centrado">
-        <a href="#" class="btn btn-primary">Agrgar administrador</a>
+        <a href="agregarAdministrador.aspx" class="btn btn-primary">Agrgar administrador</a>
     </div>
 
     <hr />
@@ -58,14 +60,14 @@
                 <td><%= item.person.names %></td>
                 <td><%= item.person.DNI %></td>
                 <td>
-                    <a href="#" class="btn btn-primary">Eliminar</a>
+                    <!--<a href="#" class="btn btn-primary">Eliminar</a> ANULADO POR AHORA-->
                 </td>
             </tr>
             <% }
                 } %>
         </table>
         <div class="centrado">
-            <a href="#" class="btn btn-primary">Agregar estudiante</a>
+            <a href="agregarAlumno.aspx" class="btn btn-primary">Agregar estudiante</a>
         </div>
     </div>
     <hr />

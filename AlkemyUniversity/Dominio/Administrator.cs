@@ -19,5 +19,15 @@ namespace Dominio
             user = new User();
             person = new Person();
         }
+        public Administrator(string password, string lastname, string names, int DNI)
+        {
+            //constructor para registrar administradores
+            user = new User();
+            person = new Person();
+            this.password = password;
+            this.person.lastname = lastname;
+            this.person.names = names;
+            this.person.DNI = DNI;
+        }
     }
 }

@@ -17,6 +17,14 @@ namespace Dominio
             user = new User();
             person = new Person();
         }
+        public Student(string lastname, string names, int dni)
+        {
+            user = new User();
+            person = new Person();
+            this.person.lastname = lastname;
+            this.person.names = names;
+            this.person.DNI = dni;
+        }
 
     }
 }
