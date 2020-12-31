@@ -15,22 +15,22 @@ namespace Web
     {
 
         /// <summary>
-        /// Control tbIDAdmin.
+        /// Control txtIDAdmin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbIDAdmin;
+        protected global::System.Web.UI.WebControls.TextBox txtIDAdmin;
 
         /// <summary>
-        /// Control tbContraseñaAdmin.
+        /// Control txtContraseñaAdmin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbContraseñaAdmin;
+        protected global::System.Web.UI.WebControls.TextBox txtContraseñaAdmin;
 
         /// <summary>
         /// Control btnIngresar.

@@ -15,7 +15,6 @@ namespace Web
         public int subject_id;
         public Subject_info subject_info = new Subject_info();
         public List<Schedules> lista_schedules = new List<Schedules>();
-        string schedules_by_subject;
         protected void Page_Load(object sender, EventArgs e)
         {
             Redireccionar();
@@ -31,7 +30,7 @@ namespace Web
         }
         protected void Redireccionar()
         {
-            if (Session["ObjetoUsuario"] != null || Session["AdminBool"] == null)
+            if (Session["ObjetoUsuario"] == null || Session["AdminBool"] == null)
             {
                 Response.Redirect("loginAlumno.aspx");
             }

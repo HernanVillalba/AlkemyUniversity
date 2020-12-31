@@ -1,6 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editarMateria_horarios.aspx.cs" Inherits="Web.editarMateria_horarios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function validarEditarMateria() {
+            var hsCom = document.getElementById("<%= txtComienzo.ClientID %>").value;
+            var hsFin = document.getElementById("<% = txtFinalizacion.ClientID %>").value;
+            if (hsCom === "") {
+
+                alert("Debe indicar el horario de comienzo.");
+                return false;
+            }
+            if (hsFin === "") {
+                alert("Debe indicar el horario de finalización.");
+                return false;
+            }
+        }
+    </script>
     <div>
         <div>
             <table class="table table-bordered">
@@ -60,23 +75,18 @@
             </div>
             <div class="form-group">
                 <label>Comienzo</label>
-                /
-                <label>Finalización</label>
+                <asp:TextBox ID="txtComienzo" runat="server" CssClass="form-control" type="time" />
+
             </div>
             <div class="form-group">
-                <div class="form-inline">
-                    <asp:TextBox ID="txtFinalizacion" runat="server" CssClass="form-control" type="time" />
-                    /
-                    <asp:TextBox ID="txtComienzo" runat="server" CssClass="form-control" type="time"/>
-                </div>
-                <div class="form-inline">
-                </div>
+                <label>Finalización</label>
+                <asp:TextBox ID="txtFinalizacion" runat="server" CssClass="form-control" type="time" />
             </div>
         </div>
-        <div>
-            <a href="editarMateria.aspx?ID=<%=SubjectID.ToString() %>">Volver</a>
-            <asp:Button ID="btnGuardar" Text="Guardar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
-        </div>
-
     </div>
+    <div>
+        <a href="editarMateria.aspx?ID=<%=SubjectID.ToString() %>" class="btn btn-primary">Volver</a>
+        <asp:Button ID="btnGuardar" Text="Guardar" runat="server" CssClass="btn btn-primary" OnClientClick="return validarEditarMateria();" OnClick="btnGuardar_Click" />
+    </div>
+
 </asp:Content>

@@ -28,13 +28,13 @@ namespace Web
 
         protected void Redireccionar()
         {
-            if (Session["ObjetoUsuario"] != null || Session["AdminBool"] == null)
+            if (Session["ObjetoUsuario"] == null || Session["AdminBool"] == null)
             {
+                if (Session["AdminBool"] == null || (bool)Session["AdminBool"])
+                {
+                    Response.Redirect("loginAdministradorPagina.aspx");
+                }
                 Response.Redirect("loginAlumno.aspx");
-            }
-            if ((bool)Session["AdminBool"])
-            {
-                Response.Redirect("loginAdministradorPagina.aspx");
             }
         }
 

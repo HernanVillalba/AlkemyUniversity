@@ -2,6 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="centrado">
+        <script>
+            function validarNuevaMateria() {
+
+            }
+        </script>
         <div>
             <div>
                 <%if (Session["ErrorMessage"] != null)

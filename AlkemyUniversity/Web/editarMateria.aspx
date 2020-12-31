@@ -1,7 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editarMateria.aspx.cs" Inherits="Web.editarMateria" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
+    <script>
+        function validarEditarMateria() {
+            var nombre = document.getElementById("<% = txtNombre.ClientID %>").value;
+            var capcidad_max = document.getElementById("<% = txtCapacidadMax.ClientID %>").value;
+            if (nombre === "" || capcidad_max === "") {
+                alert("Debe completar los campos de  'Nombre' y 'Capacidad máxima'");
+                return false;
+            }
+            return true;
+        }
+    </script>
     <div>
         <div class="centrado">
             <h1>Editar materia</h1>
@@ -46,7 +56,7 @@
     <hr />
     <div class="centrado">
         <a href="administrarMaterias.aspx" class="btn btn-primary">Volver</a>
-        <asp:Button runat="server" ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
+        <asp:Button runat="server" ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" OnClientClick="return validarEditarMateria();" OnClick="btnGuardar_Click" />
     </div>
 
 

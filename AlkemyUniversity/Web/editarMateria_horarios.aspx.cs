@@ -58,6 +58,11 @@ namespace Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            if(ddlDias.SelectedValue == "0")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", "alert('Debe seleccionar el día.')", true);
+                Response.Redirect("editarMateria_horarios.aspx?ID=" + SubjectID);
+            }
             Schedules schedules = new Schedules();
             schedules.day = ddlDias.SelectedItem.ToString();
             schedules.start_time = TimeSpan.Parse(txtComienzo.Text);

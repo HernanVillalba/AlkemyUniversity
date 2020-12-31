@@ -22,7 +22,7 @@
             <% } %>
         </table>
         <div class="centrado">
-            <a href="menuAdministrador.aspx" class="btn btn-primary btn-block">Volver al menú</a>
+            <a href="menuAlumno.aspx" class="btn btn-primary btn-block">Volver al menú</a>
         </div>
     </div>
 </asp:Content>

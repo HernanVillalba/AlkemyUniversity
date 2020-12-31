@@ -1,5 +1,19 @@
 ﻿<%@ Page Title="Agregar alumno" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="agregarAlumno.aspx.cs" Inherits="Web.agregarAlumno" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function validarNuevoAlumno() {
+            var apellidos = document.getElementById("<% = txtApellido.ClientID  %>").value;
+            var nombres = document.getElementById("<% = txtNombres.ClientID %>").value;
+            var dni = document.getElementById("<% = txtDNI.ClientID %>").value;
+            if (apellidos === "" || nombres === "" || dni === "") {
+                alert("Debe completar todos lo campos.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
     <%if (Session["ErrorMessageAgregarAlumno"] != null)
         {
             if ((bool)Session["ErrorMessageAgregarAlumno"] == true)
@@ -39,6 +53,6 @@
     </div>
     <div class="form-group centrado">
         <a href="administrarUsuarios.aspx" class="btn btn-primary">Volver</a>
-        <asp:Button ID="btnAgregar" Text="Agregar" runat="server" CssClass="btn btn-primary" OnClick="btnAgregar_Click" />
+        <asp:Button ID="btnAgregar" Text="Agregar" runat="server" CssClass="btn btn-primary" OnClientClick="return validarNuevoAlumno();" OnClick="btnAgregar_Click" />
     </div>
 </asp:Content>

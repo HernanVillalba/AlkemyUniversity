@@ -179,6 +179,10 @@ namespace Negocio
                     student.person.DNI = reader.GetInt32(4);
                     student.user.admin = reader.GetBoolean(5);
                 }
+                else
+                {
+                    student = null;
+                }
                 connection.Close();
             }
             catch (Exception)

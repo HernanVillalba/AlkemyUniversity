@@ -37,8 +37,8 @@ namespace Web
             Administrator admin = new Administrator();
 
             //guardo los valores ingresados en el Front en la variable admin
-            admin.ID = Convert.ToInt32(tbIDAdmin.Text);
-            admin.password = tbContraseñaAdmin.Text;
+            admin.ID = Convert.ToInt32(txtIDAdmin.Text);
+            admin.password = txtContraseñaAdmin.Text;
 
 
             //me devuelve id=0 si no son correctos los datos ingresados

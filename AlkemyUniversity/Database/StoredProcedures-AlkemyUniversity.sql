@@ -422,7 +422,7 @@ END
 
 GO
 
-CREATE PROCEDURE SP_List_my_enrollments(
+CREATE PROCEDURE SP_List_my_Enrollments(
 	@student_docket int
 )
 AS

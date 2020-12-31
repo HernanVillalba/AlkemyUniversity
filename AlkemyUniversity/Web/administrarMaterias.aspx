@@ -37,7 +37,7 @@
                     <td><%= horario %></td>
                     <td>
                         <a href="editarMateria.aspx?ID=<%=item.subject.ID %>" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-primary">Eliminar</a>
+                        <!--<a href="#" class="btn btn-primary">Eliminar</a> ANULADO POR AHORA-->
                     </td>
                     <%} %>
                 </tr>

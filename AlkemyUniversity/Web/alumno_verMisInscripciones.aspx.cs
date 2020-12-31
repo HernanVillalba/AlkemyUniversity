@@ -22,7 +22,7 @@ namespace Web
 
         protected void Redireccionar()
         {
-            if (Session["ObjetoUsuario"] != null || Session["AdminBool"] == null)
+            if (Session["ObjetoUsuario"] == null || Session["AdminBool"] == null)
             {
                 Response.Redirect("loginAlumno.aspx");
             }

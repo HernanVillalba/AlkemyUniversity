@@ -15,17 +15,18 @@ namespace Web
         protected void Page_Load(object sender, EventArgs e)
         {
             Redireccionar();
+            //btnIngresar.Attributes("OnClick", "javascript: return validar();");
         }
 
         protected void Redireccionar()
         {
             if (Session["ObjetoUsuario"] != null)
             {
-                Response.Redirect("menuAlumno.aspx");
-            }
-            if(Session["AdminBool"] != null &&  (bool)Session["AdminBool"] == true)
-            {
-                Response.Redirect("menuAdministrador.aspx");
+                Response.Redirect("loginAlumno.aspx");
+                if (Session["AdminBool"] != null && (bool)Session["AdminBool"] == true)
+                {
+                    Response.Redirect("menuAdministrador.aspx");
+                }
             }
         }
 
@@ -34,7 +35,7 @@ namespace Web
             Student student = new Student(Convert.ToInt32(txtLegajo.Text), Convert.ToInt32(txtDNI.Text));
             student = negocio.LoginEstudiante(student);
 
-            if(student != null)
+            if (student != null)
             {
                 Session["ObjetoUsuario"] = student;
                 Session["AdminBool"] = false;
