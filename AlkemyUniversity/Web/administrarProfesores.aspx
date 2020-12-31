@@ -21,7 +21,7 @@
                     <td>DNI</td>
                     <td>Activo</td>
                     <td>Cantidad de materias</td>
-                    <td>Acciones</td>
+                    <td></td>
                 </tr>
                 <%foreach (var item in listaTeachers)
                     {%>
@@ -39,7 +39,7 @@
                     <td><%=item.number_subjects %></td>
                     <td>
                         <a href="editarProfesor.aspx?ID=<%=item.ID %>" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-primary">Eliminar</a>
+                        <!--<a href="#" class="btn btn-primary">Eliminar</a> ANULADO POR AHORA-->
                     </td>
                 </tr>
                 <% } %>

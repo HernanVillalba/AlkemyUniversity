@@ -148,7 +148,7 @@ END
 
 GO
 
-CREATE PROCEDURE SP_Search_Teacher_by_ID(
+DROP PROCEDURE SP_Search_Teacher_by_ID(
 @id int
 )
 AS

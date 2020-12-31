@@ -30,15 +30,17 @@ namespace Web
         {
             negocio = new AdminNegocio();
             //cargo los datos ingresados de la web en la variable teacher para guardalos en la DB
-            teacher = new Teacher(Convert.ToInt32(tbDNI.Text),tbApellido.Text,tbNombres.Text,cbActivo.Checked);
+
+            teacher = new Teacher(Convert.ToInt32(txtDNI.Text),txtApellido.Text,txtNombres.Text,cbActivo.Checked);
+
             if (negocio.AgregarNuevoProfesor(teacher))
             {
                 //si no hay error al cargar el profesor
                 Session["MessageErrorNewTeacher"] = false;
                 //reinicia los campos
-                tbDNI.Text = "";
-                tbApellido.Text = "";
-                tbNombres.Text = "";
+                txtDNI.Text = "";
+                txtApellido.Text = "";
+                txtNombres.Text = "";
                 cbActivo.Checked = false;
             }
             else

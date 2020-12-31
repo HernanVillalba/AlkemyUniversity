@@ -15,31 +15,31 @@ namespace Web
     {
 
         /// <summary>
-        /// Control tbApellido.
+        /// Control txtApellido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbApellido;
+        protected global::System.Web.UI.WebControls.TextBox txtApellido;
 
         /// <summary>
-        /// Control tbNombres.
+        /// Control txtNombres.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbNombres;
+        protected global::System.Web.UI.WebControls.TextBox txtNombres;
 
         /// <summary>
-        /// Control tbDNI.
+        /// Control txtDNI.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbDNI;
+        protected global::System.Web.UI.WebControls.TextBox txtDNI;
 
         /// <summary>
         /// Control cbActivo.

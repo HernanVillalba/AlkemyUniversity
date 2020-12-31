@@ -4,7 +4,35 @@
     <div class="centrado">
         <script>
             function validarNuevaMateria() {
-
+                var nombre = document.getElementById("<% = txtNombre.ClientID %>").value;
+                var capMax = document.getElementById("<% = txtCapacidadMax.ClientID %>").value;
+                var hsCom = document.getElementById("<% = txtComienzo.ClientID %>").value;
+                var hsFin = document.getElementById("<% = txtFinal.ClientID %>").value;
+                var ddlDias = document.getElementById("<%= ddlDias.ClientID %>").value;
+                var ddlProfesores = document.getElementById("<% = ddlProfesores.ClientID %>").value;
+                
+                if (nombre === "" || hsCom === "" || hsFin === "") {
+                    alert("Debe completar todos los campos.");
+                    return false;
+                }
+                if (isNaN(capMax)) {
+                    alert("El valor de 'Capacidad máxima' debe ser un número.");
+                    ddlProfesores.add
+                    return false;
+                }
+                if (ddlDias === "0") {
+                    alert("Seleccioner el día.");
+                    return false;
+                }
+                if (ddlProfesores === "0") {
+                    alert("Seleccioner un profesor.");
+                    return false;
+                }
+                return true;
+                
+            }
+            function alerta(elemento) {
+                alert(elemento.value)
             }
         </script>
         <div>
@@ -40,7 +68,7 @@
                 <div class="form-group">
                     <label class="col-form-label">
                         Día: 
-                        <asp:DropDownList runat="server" ID="ddlDias" CssClass="custom-checkbox">
+                        <asp:DropDownList runat="server" ID="ddlDias" CssClass="form-control">
                             <asp:ListItem Value="0" Text="Seleccione"></asp:ListItem>
                             <asp:ListItem Value="1" Text="Lunes"></asp:ListItem>
                             <asp:ListItem Value="2" Text="Martes"></asp:ListItem>
@@ -64,13 +92,13 @@
             <div class="form-group">
                 <label>Profesor: </label>
                 <asp:DropDownList ID="ddlProfesores" runat="server">
-                    <asp:ListItem  Value="0">Seleccione</asp:ListItem>
+                    <asp:ListItem Value="0">Seleccione</asp:ListItem>
                 </asp:DropDownList>
                 <a href="agregarProfesor.aspx" class="btn btn-primary primary-color">Agregar profesor</a>
             </div>
             <div class="centrado">
-                <a href="menuAdministrador.aspx" class="btn btn-primary primary-color">Cancelar</a>
-                <asp:Button ID="btnAgregar" Text="Agregar materia" runat="server" CssClass="btn btn-primary primary-color" OnClick="btnAgregar_Click" />
+                <a href="administrarMaterias.aspx" class="btn btn-primary primary-color">Cancelar</a>
+                <asp:Button ID="btnAgregar" Text="Agregar materia" runat="server" CssClass="btn btn-primary primary-color" OnClientClick="return validarNuevaMateria();" OnClick="btnAgregar_Click" />
             </div>
         </div>
     </div>

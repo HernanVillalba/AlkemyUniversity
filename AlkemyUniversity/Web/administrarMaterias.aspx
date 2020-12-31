@@ -49,8 +49,10 @@
                 <h4 class="alert-heading">No hay materias para listar.</h4>
             </div>
             <%} %>
-            <a href="menuAdministrador.aspx" class="btn btn-primary">Volver al menú principal</a>
-            <a href="AgregarMateria.aspx" class="btn btn-primary">Agregar materia</a>
+            <div class="centrado">
+                <a href="menuAdministrador.aspx" class="btn btn-primary">Volver al menú principal</a>
+                <a href="AgregarMateria.aspx" class="btn btn-primary">Agregar materia</a>
+            </div>
         </div>
     </div>
 </asp:Content>
