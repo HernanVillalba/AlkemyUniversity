@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="menuAdministrador.aspx.cs" Inherits="Web.menuAdministrador2" %>
+﻿<%@ Page Title="Menú administradores" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="menuAdministrador.aspx.cs" Inherits="Web.menuAdministrador2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="centrado">

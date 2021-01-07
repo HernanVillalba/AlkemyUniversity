@@ -15,6 +15,9 @@ Maximum_Capacity int not null
 GO 
 ALTER TABLE Subjects
 ADD CONSTRAINT PK_Subjects_ID PRIMARY KEY(ID)
+GO
+ALTER TABLE Subjects
+ADD UNIQUE(Subject_Name)
 
 -------------------------
 
@@ -550,6 +553,49 @@ BEGIN
 	join Subjects as S on S.ID = IbS.Subject_ID
 	where IbS.Student_Docket = @student_docket
 END
+
+GO
+
+CREATE PROCEDURE SP_Student_Subject_Search(
+	@keyword varchar(100),
+	@student_docket int
+)
+AS
+BEGIN
+	Select S.ID, S.Subject_Name
+	from Subjects as S
+	full join Inscriptions_by_Student as I on I.Subject_ID = S.ID
+	full join Students as St on St.Docket = I.Student_Docket
+	WHERE (
+		select count(I.Student_Docket) from Inscriptions_by_Student	AS I
+		where I.Student_Docket = @student_docket and I.Subject_ID = S.ID
+	) = 0
+	AND S.ID IS NOT NULL AND
+	S.Subject_Name like '%'+ @keyword + '%'
+	group by S.ID, S.Subject_Name
+	ORDER BY Subject_Name ASC
+END
+
+GO
+
+CREATE PROCEDURE SP_List_Subjects_Student
+(
+	@student_docket int
+)
+AS
+BEGIN
+	Select S.ID, S.Subject_Name
+	from Subjects as S
+	full join Inscriptions_by_Student as I on I.Subject_ID = S.ID
+	full join Students as St on St.Docket = I.Student_Docket
+	WHERE (
+		select count(I.Student_Docket) from Inscriptions_by_Student	AS I
+		where I.Student_Docket = @student_docket and I.Subject_ID = S.ID
+	) = 0
+	AND S.ID IS NOT NULL
+	group by S.ID, S.Subject_Name
+END
+
 ---------------------------------------------------------------------------
 
 --INSERT DE ALGUNOS DATOS DE PRUEBA

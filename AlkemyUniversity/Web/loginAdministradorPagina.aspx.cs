@@ -15,7 +15,7 @@ namespace Web
         {
             if (Session["ID"] != null)
             {
-                if ((bool)Session["AdminBool"] == true)
+                if (Session["AdminBool"] == null || (bool)Session["AdminBool"] == true)
                 {
                     //si quiere volver a ingresar ya habiendose logueado antes como
                     //admin, lo redirijo a su menú.

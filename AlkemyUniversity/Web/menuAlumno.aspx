@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="menuAlumno.aspx.cs" Inherits="Web.menuAlumno2" %>
+﻿<%@ Page Title="Menú alumnos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="menuAlumno.aspx.cs" Inherits="Web.menuAlumno2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -6,13 +6,40 @@
         <h1>Inscripción a materias</h1>
     </div>
 
+
     <div class="centrado">
         <div class="jumbotron" style="width: auto;">
             <div class="form-inline">
                 <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" />
-                <asp:Button ID="btnBuscar" Text="Buscar materia" runat="server" CssClass="btn btn-primary" />
+                <asp:Button ID="btnBuscar" Text="Buscar materia" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
             </div>
         </div>
+    </div>
+
+    <div class="centrado">
+        <%if (Session["filasAfectadas"] != null)
+            {
+                if ((int)Session["filasAfectadas"] > 1)
+                {%>
+        <div class="alert alert-success">
+            Se inscribió correctamente.
+        </div>
+        <%}
+            if ((int)Session["filasAfectadas"] == 0)
+            {%>
+        <div class="alert alert-warning">
+            Hubo un error al inscrirse a la materia.
+        </div>
+        <%}
+                Session["filasAfectadas"] = null;
+            }%>
+        <div class="alert alert-">
+        </div>
+
+    </div>
+
+    <div class="centrado">
+        <h3>Materias disponibles: </h3>
     </div>
 
     <div class="centrado">

@@ -40,7 +40,7 @@
 
     <div>
         <div class="centrado">
-            <h3>Usuarios</h3>
+            <h3>Alumnos</h3>
         </div>
         <table class="table table-bordered">
             <tr>
@@ -67,7 +67,7 @@
                 } %>
         </table>
         <div class="centrado">
-            <a href="agregarAlumno.aspx" class="btn btn-primary">Agregar estudiante</a>
+            <a href="agregarAlumno.aspx" class="btn btn-primary">Agregar Alumno</a>
         </div>
     </div>
     <hr />

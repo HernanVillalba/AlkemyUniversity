@@ -19,6 +19,34 @@ namespace Negocio
         SqlCommand command;
         SqlDataReader reader;
 
+        public List<Subject> ListarBusquedaMateria (string keyword, int student_docket)
+        {
+            command = new SqlCommand("SP_Student_Subject_Search", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@keyword", keyword);
+            command.Parameters.AddWithValue("@student_docket", student_docket);
+            List<Subject> lista = new List<Subject>();
+
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Subject aux = new Subject();
+                    aux.ID = reader.GetInt32(0);
+                    aux.name = reader.GetString(1);
+                    lista.Add(aux);
+                }
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                lista = null;
+            }
+            return lista;
+        }
+
         public List<Subject> ListarMisInscripciones(int student_docket)
         {
             command = new SqlCommand("SP_List_my_Enrollments", connection);
@@ -111,9 +139,8 @@ namespace Negocio
             return aux;
         }
 
-        public bool InscribirAlumnoAMateria(int subject_id, int student_docket)
+        public int InscribirAlumnoAMateria(int subject_id, int student_docket)
         {
-            bool guardo;
             int filas_afectadas = 0;
             command = new SqlCommand("SP_Enroll_in_a_Subject", connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -130,14 +157,14 @@ namespace Negocio
                 filas_afectadas = 0;
             }
 
-            if (filas_afectadas > 0) { guardo = true; }
-            else { guardo = false; }
-            return guardo;
+            return filas_afectadas;
         }
 
-        public List<Subject> listarMateriasAlumno()
+        public List<Subject> listarMateriasAlumno(int student_docket)
         {
-            command = new SqlCommand("SELECT*FROM VW_List_Subjects_Student ORDER BY Subject_Name ASC", connection);
+            command = new SqlCommand("SP_List_Subjects_Student", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@student_docket", student_docket);
             List<Subject> lista = new List<Subject>();
             try
             {

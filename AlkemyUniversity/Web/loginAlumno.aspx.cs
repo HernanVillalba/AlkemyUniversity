@@ -20,12 +20,15 @@ namespace Web
 
         protected void Redireccionar()
         {
-            if (Session["ObjetoUsuario"] != null)
+            if (Session["ID"] != null)
             {
-                Response.Redirect("loginAlumno.aspx");
-                if (Session["AdminBool"] != null && (bool)Session["AdminBool"] == true)
+                if (Session["AdminBool"] != null && (bool)Session["AdminBool"])
                 {
                     Response.Redirect("menuAdministrador.aspx");
+                }
+                if (Session["AdminBool"] != null && !(bool)Session["AdminBool"])
+                {
+                    Response.Redirect("menuAlumno.aspx");
                 }
             }
         }
@@ -37,6 +40,7 @@ namespace Web
 
             if (student != null)
             {
+                Session["ID"] = student.docket;
                 Session["ObjetoUsuario"] = student;
                 Session["AdminBool"] = false;
                 Response.Redirect("menuAlumno.aspx");

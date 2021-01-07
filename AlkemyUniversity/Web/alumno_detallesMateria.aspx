@@ -2,6 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div>
+        <div class="centrado">
+            <h1>Detalles materia</h1>
+        </div>
         <table class="table table-bordered">
             <tr>
                 <td>Nombre de la materia</td>
@@ -32,5 +35,8 @@
             </tr>
             <% } %>
         </table>
+        <div class="centrado">
+            <a href="menuAlumno.aspx" class="btn btn-primary btn-block">Volver</a>
+        </div>
     </div>
 </asp:Content>

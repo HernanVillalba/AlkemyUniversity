@@ -97,7 +97,7 @@
                 <a href="agregarProfesor.aspx" class="btn btn-primary primary-color">Agregar profesor</a>
             </div>
             <div class="centrado">
-                <a href="administrarMaterias.aspx" class="btn btn-primary primary-color">Cancelar</a>
+                <a href="administrarMaterias.aspx" class="btn btn-primary primary-color">Volver</a>
                 <asp:Button ID="btnAgregar" Text="Agregar materia" runat="server" CssClass="btn btn-primary primary-color" OnClientClick="return validarNuevaMateria();" OnClick="btnAgregar_Click" />
             </div>
         </div>
